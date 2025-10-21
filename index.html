@@ -163,6 +163,30 @@
         opacity: 1;
         transform: translateY(0px);
       }
+      @keyframes slideIn {
+        0% {
+          opacity: 0;
+          transform: translateY(-12px);
+        }
+        100% {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+      .animate-slide-in {
+        animation: slideIn 0.35s ease forwards;
+      }
+      .sr-only {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        padding: 0;
+        margin: -1px;
+        overflow: hidden;
+        clip: rect(0, 0, 0, 0);
+        white-space: nowrap;
+        border: 0;
+      }
     </style>
   </head>
   <body class="text-solingen-dark">
@@ -175,19 +199,52 @@
                 Logo alanı boş bırakıldı
                 <span>assets/solingen-logo.png buraya yerleştirilecek</span>
               </div>
-              <nav class="flex items-center gap-6 text-sm font-semibold text-white/90">
+              <nav class="hidden md:flex items-center gap-6 text-sm font-semibold text-white/90">
                 <a class="hover:text-white transition-colors" href="#anasayfa">Ana Sayfa</a>
                 <a class="hover:text-white transition-colors" href="#biz-kimiz">Biz Kimiz?</a>
                 <a class="hover:text-white transition-colors" href="#faaliyetler">Enerji Faaliyetleri</a>
                 <a class="hover:text-white transition-colors" href="#cozumler">Çözümlerimiz</a>
                 <a class="hover:text-white transition-colors" href="#iletisim">İletişim</a>
               </nav>
+              <div class="flex items-center gap-4">
+                <a
+                  class="hidden sm:inline-flex items-center gap-2 rounded-full bg-white/10 px-5 py-2 text-white backdrop-blur-md transition-all duration-300 hover:bg-white/20 hover:shadow-neon"
+                  href="#iletisim"
+                >
+                  <span class="material-icons text-lg">flash_on</span>
+                  Hızlı Teklif
+                </a>
+                <button
+                  class="inline-flex md:hidden h-12 w-12 items-center justify-center rounded-2xl bg-white/10 text-white backdrop-blur-md transition hover:bg-white/20"
+                  type="button"
+                  id="mobile-menu-toggle"
+                  aria-controls="mobile-menu"
+                  aria-expanded="false"
+                >
+                  <span class="material-icons" data-icon-closed="menu" data-icon-open="close">menu</span>
+                  <span class="sr-only">Menüyü Aç</span>
+                </button>
+              </div>
+            </div>
+          </div>
+          <div
+            id="mobile-menu"
+            class="md:hidden max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-4 pb-6 hidden"
+          >
+            <div class="rounded-3xl bg-white/10 backdrop-blur-xl p-6 text-white shadow-neon">
+              <nav class="flex flex-col gap-4 text-base font-semibold">
+                <a class="hover:text-white/80 transition" href="#anasayfa">Ana Sayfa</a>
+                <a class="hover:text-white/80 transition" href="#biz-kimiz">Biz Kimiz?</a>
+                <a class="hover:text-white/80 transition" href="#faaliyetler">Enerji Faaliyetleri</a>
+                <a class="hover:text-white/80 transition" href="#cozumler">Çözümlerimiz</a>
+                <a class="hover:text-white/80 transition" href="#iletisim">İletişim</a>
+              </nav>
               <a
-                class="inline-flex items-center gap-2 rounded-full bg-white/10 px-5 py-2 text-white backdrop-blur-md transition-all duration-300 hover:bg-white/20 hover:shadow-neon"
+                class="mt-6 inline-flex w-full items-center justify-center gap-3 rounded-full bg-white px-6 py-3 font-semibold text-solingen-blue shadow-lg transition hover:-translate-y-0.5 hover:shadow-neon"
                 href="#iletisim"
               >
-                <span class="material-icons text-lg">flash_on</span>
-                Hızlı Teklif
+                <span class="material-icons">flash_on</span>
+                Hızlı Teklif Al
               </a>
             </div>
           </div>
@@ -531,6 +588,39 @@
         }
       );
       document.querySelectorAll(".fade-up").forEach((element) => observer.observe(element));
+
+      const mobileToggle = document.getElementById("mobile-menu-toggle");
+      const mobileMenu = document.getElementById("mobile-menu");
+      const mobileIcon = mobileToggle?.querySelector(".material-icons");
+
+      if (mobileToggle && mobileMenu && mobileIcon) {
+        const updateIcon = (isOpen) => {
+          const openIcon = mobileIcon.dataset.iconOpen || "close";
+          const closedIcon = mobileIcon.dataset.iconClosed || "menu";
+          mobileIcon.textContent = isOpen ? openIcon : closedIcon;
+          mobileToggle.setAttribute("aria-expanded", String(isOpen));
+        };
+
+        mobileToggle.addEventListener("click", () => {
+          const isHidden = mobileMenu.classList.contains("hidden");
+          mobileMenu.classList.toggle("hidden");
+          mobileMenu.classList.toggle("animate-slide-in");
+          updateIcon(isHidden);
+        });
+
+        document.addEventListener("click", (event) => {
+          if (
+            !mobileMenu.classList.contains("hidden") &&
+            !mobileMenu.contains(event.target) &&
+            event.target !== mobileToggle &&
+            !mobileToggle.contains(event.target)
+          ) {
+            mobileMenu.classList.add("hidden");
+            mobileMenu.classList.remove("animate-slide-in");
+            updateIcon(false);
+          }
+        });
+      }
 
       const animateNumbers = (elements) => {
         const duration = 1800;
