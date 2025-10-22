@@ -57,31 +57,6 @@
           width: 220px;
         }
       }
-      .logo-placeholder {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        min-width: 180px;
-        min-height: 120px;
-        gap: 4px;
-        padding: 12px;
-        border-radius: 28px;
-        border: 2px dashed rgba(255, 255, 255, 0.45);
-        background: rgba(255, 255, 255, 0.07);
-        color: rgba(255, 255, 255, 0.8);
-        text-transform: uppercase;
-        letter-spacing: 0.35em;
-        font-size: 0.6rem;
-        line-height: 1.2;
-        text-align: center;
-      }
-      .logo-placeholder span {
-        display: block;
-        letter-spacing: 0.28em;
-        font-size: 0.55rem;
-        color: rgba(255, 255, 255, 0.6);
-      }
       .hero-area {
         position: relative;
         overflow: hidden;
@@ -195,30 +170,6 @@
         height: auto;
         filter: drop-shadow(0 8px 18px rgba(12, 70, 120, 0.18));
       }
-      .about-logo-placeholder {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        width: 72px;
-        height: 72px;
-        border-radius: 24px;
-        border: 2px dashed rgba(18, 118, 209, 0.35);
-        background: rgba(255, 255, 255, 0.9);
-        color: rgba(11, 37, 69, 0.75);
-        font-size: 0.55rem;
-        text-transform: uppercase;
-        letter-spacing: 0.32em;
-        text-align: center;
-        line-height: 1.2;
-      }
-      .about-logo-placeholder span {
-        display: block;
-        margin-top: 2px;
-        font-size: 0.5rem;
-        letter-spacing: 0.28em;
-        color: rgba(11, 37, 69, 0.5);
-      }
       .fade-up {
         opacity: 0;
         transform: translateY(20px);
@@ -261,17 +212,8 @@
           <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8">
             <div class="flex flex-wrap items-center justify-between gap-6">
               <a class="inline-flex items-center" href="#anasayfa" aria-label="Solingen Energy ana sayfa">
-                <div class="logo-wrapper" data-logo-wrapper>
-                  <img
-                    class="brand-logo hidden"
-                    src="assets/logo1png.png"
-                    alt="Solingen Energy ana logosu"
-                    data-logo-img
-                  />
-                  <div class="logo-placeholder" data-logo-placeholder>
-                    LOGO ALANI
-                    <span>assets/logo1png.png</span>
-                  </div>
+                <div class="logo-wrapper">
+                  <img class="brand-logo" src="assets/logo1png.png" alt="Solingen Energy ana logosu" />
                 </div>
               </a>
               <nav class="hidden md:flex items-center gap-6 text-sm font-semibold text-white/90">
@@ -391,17 +333,12 @@
           <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="max-w-3xl mb-16 fade-up">
               <div class="flex items-center gap-4 mb-8">
-                <div class="about-logo-wrapper" data-logo-wrapper>
+                <div class="about-logo-wrapper">
                   <img
-                    class="about-logo-image hidden"
+                    class="about-logo-image"
                     src="assets/logo2png.png"
                     alt="Solingen Energy amblem logosu"
-                    data-logo-img
                   />
-                  <div class="about-logo-placeholder" data-logo-placeholder>
-                    LOGO
-                    <span>assets/logo2png.png</span>
-                  </div>
                 </div>
                 <span class="text-xs font-semibold uppercase tracking-[0.5em] text-solingen-blue/80">
                   Solingen Energy
@@ -680,43 +617,6 @@
         }
       );
       document.querySelectorAll(".fade-up").forEach((element) => observer.observe(element));
-
-      const initializeLogos = () => {
-        document.querySelectorAll("[data-logo-wrapper]").forEach((wrapper) => {
-          const image = wrapper.querySelector("[data-logo-img]");
-          const placeholder = wrapper.querySelector("[data-logo-placeholder]");
-
-          if (!image || !placeholder) {
-            return;
-          }
-
-          const showImage = () => {
-            image.classList.remove("hidden");
-            placeholder.classList.add("hidden");
-          };
-
-          const showPlaceholder = () => {
-            image.classList.add("hidden");
-            placeholder.classList.remove("hidden");
-          };
-
-          image.addEventListener("load", showImage);
-          image.addEventListener("error", showPlaceholder);
-
-          if (!image.complete) {
-            showPlaceholder();
-            return;
-          }
-
-          if (image.naturalWidth > 0) {
-            showImage();
-          } else {
-            showPlaceholder();
-          }
-        });
-      };
-
-      initializeLogos();
 
       const mobileToggle = document.getElementById("mobile-menu-toggle");
       const mobileMenu = document.getElementById("mobile-menu");
