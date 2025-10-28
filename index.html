@@ -47,15 +47,38 @@
         align-items: center;
         justify-content: center;
       }
+      .logo-badge {
+        padding: 0.6rem 1.5rem;
+        border-radius: 9999px;
+        background: linear-gradient(135deg, rgba(6, 33, 61, 0.92), rgba(18, 118, 209, 0.88));
+        box-shadow: 0 18px 36px rgba(6, 33, 61, 0.35);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+      }
+      .header-logo {
+        background: linear-gradient(135deg, rgba(6, 33, 61, 0.9), rgba(17, 179, 162, 0.82));
+      }
+      .footer-logo {
+        background: linear-gradient(135deg, rgba(18, 118, 209, 0.45), rgba(17, 179, 162, 0.45));
+        border: 1px solid rgba(255, 255, 255, 0.35);
+      }
       .brand-logo {
         width: 180px;
         max-width: 60vw;
         filter: drop-shadow(0 10px 24px rgba(15, 88, 150, 0.28));
         image-rendering: -webkit-optimize-contrast;
       }
+      .footer-brand-logo {
+        width: 140px;
+        max-width: 45vw;
+        filter: drop-shadow(0 8px 18px rgba(9, 48, 82, 0.35));
+      }
       @media (min-width: 768px) {
         .brand-logo {
           width: 220px;
+        }
+        .footer-brand-logo {
+          width: 160px;
+          max-width: 200px;
         }
       }
       .header-shell {
@@ -107,6 +130,52 @@
         overflow: hidden;
         background: linear-gradient(135deg, rgba(18, 118, 209, 0.94), rgba(17, 179, 162, 0.9), rgba(109, 219, 108, 0.86));
         box-shadow: 0 30px 70px rgba(5, 24, 46, 0.45);
+      }
+      .hero-lead-badge {
+        background: linear-gradient(135deg, rgba(255, 255, 255, 0.32), rgba(255, 255, 255, 0.14));
+        border: 1px solid rgba(255, 255, 255, 0.35);
+        box-shadow: 0 12px 30px rgba(5, 24, 46, 0.25);
+      }
+      .hero-primary-cta {
+        background: linear-gradient(135deg, rgba(255, 255, 255, 0.95), rgba(226, 246, 255, 0.92));
+        color: #0b2545;
+        font-size: 1.05rem;
+        padding: 1rem 2.5rem;
+        border-radius: 9999px;
+        box-shadow: 0 18px 40px rgba(6, 33, 61, 0.35);
+        transition: transform 0.35s ease, box-shadow 0.35s ease;
+      }
+      .hero-primary-cta:hover {
+        transform: translateY(-6px);
+        box-shadow: 0 26px 55px rgba(6, 33, 61, 0.45);
+      }
+      .hero-secondary-cta {
+        border-radius: 9999px;
+        border: 1px solid rgba(255, 255, 255, 0.6);
+        padding: 1rem 2.3rem;
+        font-size: 1.05rem;
+        color: #ffffff;
+        background: rgba(255, 255, 255, 0.06);
+        backdrop-filter: blur(8px);
+        transition: transform 0.35s ease, background 0.35s ease;
+      }
+      .hero-secondary-cta:hover {
+        transform: translateY(-6px);
+        background: rgba(255, 255, 255, 0.16);
+      }
+      .hero-accent-cta {
+        border-radius: 9999px;
+        background: linear-gradient(135deg, rgba(6, 33, 61, 0.92), rgba(255, 255, 255, 0.18));
+        border: 1px solid rgba(255, 255, 255, 0.42);
+        padding: 1rem 2.4rem;
+        font-size: 1.05rem;
+        color: #ffffff;
+        box-shadow: 0 18px 40px rgba(6, 33, 61, 0.38);
+        transition: transform 0.35s ease, box-shadow 0.35s ease;
+      }
+      .hero-accent-cta:hover {
+        transform: translateY(-6px);
+        box-shadow: 0 28px 60px rgba(6, 33, 61, 0.5);
       }
       .hero-area::before,
       .hero-area::after {
@@ -316,7 +385,7 @@
           <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-6 pb-4 header-nav">
             <div class="flex flex-wrap items-center justify-between gap-6">
               <a class="inline-flex items-center" href="#anasayfa" aria-label="Solingen Energy ana sayfa">
-                <div class="logo-wrapper">
+                <div class="logo-wrapper logo-badge header-logo">
                   <img class="brand-logo" src="assets/logom2png.png" alt="Solingen Energy ana logosu" />
                 </div>
               </a>
@@ -375,7 +444,7 @@
             <div class="grid lg:grid-cols-2 gap-12 items-center">
               <div class="space-y-6 text-white relative z-10 fade-up">
                 <a
-                  class="inline-flex items-center gap-3 rounded-full bg-white/10 px-4 py-2 text-xs uppercase tracking-[0.3em] transition hover:bg-white/20"
+                  class="inline-flex items-center gap-3 rounded-full hero-lead-badge px-5 py-2.5 text-sm uppercase tracking-[0.35em] text-white transition hover:bg-white/30"
                   href="#iletisim"
                 >
                   <span class="material-icons text-base">flash_on</span>
@@ -388,18 +457,16 @@
                   Solingen Energy, güneş ve yenilenebilir enerji projelerinde canlı, cesur ve etkileyici çözümler sunar. Çevreci teknolojilerimizle işletmenizi ve yaşam alanınızı ışık hızında dönüştürün.
                 </p>
                 <div class="flex flex-wrap gap-4">
-                  <a
-                    class="inline-flex items-center justify-center gap-3 rounded-full bg-white px-6 py-3 font-semibold text-solingen-blue shadow-lg transition transform hover:-translate-y-1 hover:shadow-neon"
-                    href="#faaliyetler"
-                  >
+                  <a class="inline-flex items-center justify-center gap-3 hero-primary-cta" href="#faaliyetler">
                     Enerji Faaliyetlerimizi Keşfedin
-                    <span class="material-icons">arrow_forward</span>
+                    <span class="material-icons text-solingen-blue">arrow_forward</span>
                   </a>
-                  <a
-                    class="inline-flex items-center justify-center gap-3 rounded-full border border-white/60 px-6 py-3 font-semibold text-white transition hover:bg-white/15"
-                    href="#biz-kimiz"
-                  >
+                  <a class="inline-flex items-center justify-center gap-3 hero-secondary-cta" href="#biz-kimiz">
                     Hakkımızda
+                  </a>
+                  <a class="inline-flex items-center justify-center gap-3 hero-accent-cta" href="#iletisim">
+                    Hızlı Teklif Al
+                    <span class="material-icons text-white">flash_on</span>
                   </a>
                 </div>
               </div>
@@ -531,39 +598,27 @@
             </div>
             <div class="grid gap-8 md:grid-cols-2 xl:grid-cols-3">
               <div class="grid-card p-8 fade-up">
-                <h3 class="text-2xl font-semibold text-solingen-blue">Güneş Enerjisi Santrali Projeleri</h3>
+                <h3 class="text-2xl font-semibold text-solingen-blue">Güneş Enerjisi Projeleri</h3>
                 <p class="mt-3 text-solingen-dark/70">
-                  Çiftlik ve arazi tipi yatırımlarda maksimum verim sağlayan uçtan uca EPC çözümlerini üstleniyoruz.
+                  Arazi tipi santrallerden çatı GES çözümlerine kadar tüm güneş enerjisi yatırımlarınızı uçtan uca tasarlıyoruz.
                 </p>
               </div>
               <div class="grid-card p-8 fade-up">
-                <h3 class="text-2xl font-semibold text-solingen-teal">Çatı GES Projeleri</h3>
+                <h3 class="text-2xl font-semibold text-solingen-green">Tarım Güneş Projeleri</h3>
                 <p class="mt-3 text-solingen-dark/70">
-                  Endüstriyel ve ticari çatılarda hızlı geri dönüş sağlayan modüler güneş enerjisi kurulumları tasarlıyoruz.
-                </p>
-              </div>
-              <div class="grid-card p-8 fade-up">
-                <h3 class="text-2xl font-semibold text-solingen-green">Lisanssız Çatı Santral Projeleri</h3>
-                <p class="mt-3 text-solingen-dark/70">
-                  Lisanssız yatırım mevzuatına uygun çözümlerle çatı alanlarınızı gelir getiren enerji santrallerine dönüştürüyoruz.
+                  Tarla, bağ ve bahçelerinizde güneş enerjisi entegre çalışan pompalar ile su ve enerji tasarrufu sağlamanızı sağlar.
                 </p>
               </div>
               <div class="grid-card p-8 fade-up">
                 <h3 class="text-2xl font-semibold text-solingen-blue">Otomatik Sulama Sistemleri</h3>
                 <p class="mt-3 text-solingen-dark/70">
-                  Tarımsal sulama altyapınızı güneş enerjili otomasyon sistemleriyle entegre ederek su ve enerji tasarrufu sağlıyoruz.
+                  Bahçelerinizin belirli aralıklar ile sulanmasını sağlayan otomatik sulama sistemleri projeleri uyguluyoruz.
                 </p>
               </div>
               <div class="grid-card p-8 fade-up">
-                <h3 class="text-2xl font-semibold text-solingen-teal">Akıllı Enerji Yönetim Sistemleri</h3>
+                <h3 class="text-2xl font-semibold text-solingen-teal">Hibrit Enerji Sistemleri</h3>
                 <p class="mt-3 text-solingen-dark/70">
-                  Öz kaynaklarınızı en verimli şekilde kullanmanız için izleme, optimizasyon ve depolama entegrasyonları sunuyoruz.
-                </p>
-              </div>
-              <div class="grid-card p-8 fade-up">
-                <h3 class="text-2xl font-semibold text-solingen-green">Elektrikli Şarj İstasyonları</h3>
-                <p class="mt-3 text-solingen-dark/70">
-                  Elektrikli araçlar için ölçeklenebilir şarj altyapıları kurarak sürdürülebilir mobilite stratejinizi güçlendiriyoruz.
+                  Şebeke, güneş ve jeneratör kaynaklarını birlikte yöneterek kesintisiz enerji sağlayan hibrit altyapılar kuruyoruz.
                 </p>
               </div>
             </div>
@@ -753,7 +808,11 @@
               <p class="mt-3 text-sm text-white/70">
                 Akıllı ve yenilikçi enerji çözümlerimizle sürdürülebilirliği merkezine alan projeler tasarlıyoruz.
               </p>
-              <p class="mt-4 text-xs uppercase tracking-[0.3em] text-white/50">Logo alanı: assets/logompng1.png & assets/logom2png.png</p>
+              <div class="mt-6 flex flex-wrap items-center gap-4">
+                <div class="logo-wrapper logo-badge footer-logo">
+                  <img class="brand-logo footer-brand-logo" src="assets/logom2png.png" alt="Solingen Energy tam logotayp" />
+                </div>
+              </div>
             </div>
             <div>
               <h4 class="text-lg font-semibold">Hızlı Menü</h4>
@@ -767,7 +826,7 @@
             <div>
               <h4 class="text-lg font-semibold">Faaliyetlerimiz</h4>
               <ul class="mt-3 space-y-2 text-sm text-white/70">
-                <li>Güneş Enerji Santrali</li>
+                <li>Güneş Enerjisi Projeleri</li>
                 <li>Çatı GES Projeleri</li>
                 <li>Hibrit Enerji Santrali</li>
                 <li>Biyokütle & Hidroelektrik</li>
@@ -776,10 +835,22 @@
             <div>
               <h4 class="text-lg font-semibold">İletişim</h4>
               <ul class="mt-3 space-y-2 text-sm text-white/70">
+                <li class="font-semibold uppercase tracking-[0.25em] text-red-400">İletişim Sorumlusu Adı Olmalı</li>
                 <li>İletişim Sorumlusu: Ebubekir Bey</li>
-                <li>Adres: MUSTAFA KEMAL MAH. 2163. SK. NO:6 ÇANKAYA/ANKARA</li>
-                <li>Telefon ve e-posta bilgileri Ebubekir Bey tarafından paylaşılacaktır.</li>
+                <li>
+                  Doğrudan İletişim:
+                  <a class="text-white hover:text-solingen-green transition" href="mailto:info@solingenenergy.com"
+                    >info@solingenenergy.com</a
+                  >
+                </li>
+                <li>
+                  WhatsApp:
+                  <a class="text-white hover:text-solingen-green transition" href="https://wa.me/905461122233"
+                    >+90 546 112 22 33</a
+                  >
+                </li>
               </ul>
+              <p class="mt-3 text-xs text-white/50">İnstagram ve sosyal medya adresleri paylaşılmayacaktır.</p>
             </div>
           </div>
           <div class="mt-12 flex flex-wrap items-center justify-between gap-4 text-xs text-white/60">
@@ -794,7 +865,7 @@
       </footer>
 
       <div class="fixed bottom-5 right-5 z-40">
-        <a class="flex h-14 w-14 items-center justify-center rounded-full bg-solingen-green text-solingen-dark shadow-neon transition transform hover:-translate-y-1" href="https://wa.me/905555555555" aria-label="WhatsApp">
+        <a class="flex h-14 w-14 items-center justify-center rounded-full bg-solingen-green text-solingen-dark shadow-neon transition transform hover:-translate-y-1" href="https://wa.me/905461122233" aria-label="WhatsApp">
           <svg class="whatsapp-icon" viewBox="0 0 32 32" role="img" aria-hidden="true" focusable="false">
             <path d="M16 0C7.164 0 0 7.164 0 16c0 2.816.734 5.566 2.129 7.992L.049 31.951l8.106-2.129A15.91 15.91 0 0 0 16 32c8.836 0 16-7.164 16-16S24.836 0 16 0zm7.949 23.492c-.339.949-1.961 1.801-2.68 1.851-.717.051-1.53.339-5.21-1.091-4.382-1.722-7.18-6.316-7.394-6.609-.211-.292-1.765-2.355-1.765-4.49 0-2.135 1.12-3.184 1.52-3.632.402-.448.883-.56 1.176-.56.292 0 .585.003.843.015.27.013.632-.102.988.755.339.815 1.157 2.835 1.26 3.042.103.207.171.449.03.74-.139.292-.207.449-.41.691-.205.242-.433.54-.617.724-.205.205-.42.43-.18.842.242.41 1.075 1.77 2.309 2.865 1.59 1.416 2.93 1.857 3.34 2.062.41.205.646.171.885-.103.242-.272 1.021-1.19 1.295-1.601.272-.41.543-.342.885-.205.342.137 2.155 1.017 2.523 1.202.371.186.617.275.706.43.089.154.089.949-.251 1.898z" />
           </svg>
