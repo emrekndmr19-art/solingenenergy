@@ -248,8 +248,8 @@
         position: absolute;
         top: 50%;
         left: 50%;
-        width: 115%;
-        height: 115%;
+        width: 132%;
+        height: 132%;
         display: block;
         object-fit: cover;
         transform: translate(-50%, -50%);
@@ -257,13 +257,27 @@
       .contact-icon--whatsapp {
         position: relative;
         padding: 0;
-        background: #25d366;
-        border: none;
+        width: 48px;
+        height: 48px;
+        background: radial-gradient(circle at 32% 28%, #4dfd92 0%, #21c86e 55%, #0f9551 100%);
+        border: 1px solid rgba(255, 255, 255, 0.14);
         overflow: hidden;
+        box-shadow: 0 12px 30px rgba(15, 100, 73, 0.45);
       }
       .contact-icon--whatsapp:hover {
-        background: #27e16d;
-        box-shadow: 0 12px 30px rgba(6, 33, 61, 0.35);
+        background: radial-gradient(circle at 32% 28%, #69ff9f 0%, #2ddf7e 52%, #12b35f 100%);
+        box-shadow: 0 16px 36px rgba(15, 100, 73, 0.52);
+      }
+      .floating-whatsapp {
+        position: relative;
+        background: radial-gradient(circle at 38% 30%, #58ff9d 0%, #1fbb6b 62%, #0c7e45 100%);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        overflow: hidden;
+        box-shadow: 0 20px 40px rgba(15, 100, 73, 0.4);
+      }
+      .floating-whatsapp:hover {
+        background: radial-gradient(circle at 38% 30%, #74ffae 0%, #28d57d 60%, #109456 100%);
+        box-shadow: 0 24px 44px rgba(15, 100, 73, 0.48);
       }
       main {
         position: relative;
@@ -909,7 +923,7 @@
       </footer>
 
       <div class="fixed bottom-5 right-5 z-40">
-        <a class="flex h-14 w-14 items-center justify-center overflow-hidden rounded-full shadow-neon transition transform hover:-translate-y-1" href="https://wa.me/905462854515" aria-label="WhatsApp">
+        <a class="floating-whatsapp flex h-14 w-14 items-center justify-center overflow-hidden rounded-full shadow-neon transition transform hover:-translate-y-1" href="https://wa.me/905462854515" aria-label="WhatsApp">
           <img class="whatsapp-icon" src="assets/whatsapp.png" alt="WhatsApp" />
         </a>
       </div>
