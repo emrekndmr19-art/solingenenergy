@@ -120,18 +120,18 @@
       }
       .header-shell {
         position: relative;
-        background: linear-gradient(135deg, rgba(255, 255, 255, 0.95), rgba(229, 245, 255, 0.92));
-        box-shadow: 0 18px 40px rgba(9, 48, 82, 0.1);
+        background: linear-gradient(135deg, rgba(9, 43, 81, 0.96), rgba(18, 118, 209, 0.88));
+        box-shadow: 0 18px 40px rgba(6, 33, 61, 0.35);
         border-radius: 0 0 36px 36px;
         overflow: hidden;
-        backdrop-filter: blur(10px);
+        backdrop-filter: blur(12px);
       }
       .header-shell::before {
         content: "";
         position: absolute;
         inset: -60% 55% auto -15%;
         height: 120%;
-        background: radial-gradient(circle, rgba(18, 118, 209, 0.18), transparent 70%);
+        background: radial-gradient(circle, rgba(255, 255, 255, 0.28), transparent 72%);
         pointer-events: none;
       }
       .header-nav {
@@ -139,28 +139,74 @@
         z-index: 1;
       }
       .header-menu-link {
-        color: rgba(11, 37, 69, 0.78);
+        color: rgba(255, 255, 255, 0.82);
         transition: color 0.3s ease;
       }
       .header-menu-link:hover {
-        color: rgba(18, 118, 209, 0.9);
+        color: #ffffff;
       }
       .header-cta {
-        background: linear-gradient(120deg, rgba(18, 118, 209, 0.12), rgba(17, 179, 162, 0.2));
-        color: rgba(11, 37, 69, 0.82);
-        border: 1px solid rgba(18, 118, 209, 0.18);
-        box-shadow: 0 10px 24px rgba(18, 118, 209, 0.18);
+        background: linear-gradient(120deg, rgba(255, 255, 255, 0.22), rgba(176, 226, 255, 0.35));
+        color: rgba(9, 43, 81, 0.92);
+        border: 1px solid rgba(255, 255, 255, 0.35);
+        box-shadow: 0 12px 32px rgba(0, 0, 0, 0.25);
       }
       .header-cta:hover {
-        background: linear-gradient(120deg, rgba(18, 118, 209, 0.2), rgba(17, 179, 162, 0.28));
+        background: linear-gradient(120deg, rgba(255, 255, 255, 0.32), rgba(176, 226, 255, 0.45));
       }
       .header-toggle {
-        background: rgba(18, 118, 209, 0.08);
-        color: rgba(11, 37, 69, 0.85);
-        border: 1px solid rgba(18, 118, 209, 0.16);
+        background: rgba(255, 255, 255, 0.14);
+        color: #ffffff;
+        border: 1px solid rgba(255, 255, 255, 0.32);
       }
       .header-toggle:hover {
-        background: rgba(18, 118, 209, 0.14);
+        background: rgba(255, 255, 255, 0.22);
+      }
+      .footer-shell {
+        position: relative;
+        background: linear-gradient(135deg, rgba(255, 255, 255, 0.95), rgba(229, 245, 255, 0.92));
+        box-shadow: 0 -18px 40px rgba(9, 48, 82, 0.1);
+        border-radius: 36px 36px 0 0;
+        overflow: hidden;
+        backdrop-filter: blur(10px);
+      }
+      .footer-shell::before {
+        content: "";
+        position: absolute;
+        inset: auto -15% -60% 55%;
+        height: 120%;
+        background: radial-gradient(circle, rgba(18, 118, 209, 0.18), transparent 70%);
+        pointer-events: none;
+      }
+      .footer-menu-link {
+        color: rgba(11, 37, 69, 0.78);
+        transition: color 0.3s ease;
+      }
+      .footer-menu-link:hover {
+        color: rgba(18, 118, 209, 0.9);
+      }
+      .footer-meta-link {
+        color: rgba(11, 37, 69, 0.6);
+        transition: color 0.3s ease;
+      }
+      .footer-meta-link:hover {
+        color: rgba(18, 118, 209, 0.9);
+      }
+      .footer-contact-icon {
+        background: rgba(18, 118, 209, 0.12);
+        border: 1px solid rgba(18, 118, 209, 0.18);
+        color: rgba(11, 37, 69, 0.85);
+      }
+      .footer-contact-icon:hover {
+        background: rgba(18, 118, 209, 0.2);
+        box-shadow: 0 12px 30px rgba(9, 48, 82, 0.2);
+      }
+      .footer-contact-icon.contact-icon--whatsapp {
+        background: linear-gradient(135deg, rgba(18, 118, 209, 0.14), rgba(17, 179, 162, 0.22));
+        border: 1px solid rgba(18, 118, 209, 0.24);
+      }
+      .footer-contact-icon.contact-icon--whatsapp:hover {
+        background: linear-gradient(135deg, rgba(18, 118, 209, 0.22), rgba(17, 179, 162, 0.3));
       }
       .footer-shell {
         position: relative;
@@ -219,6 +265,24 @@
         );
         box-shadow: 0 30px 70px rgba(5, 24, 46, 0.45);
       }
+      .hero-copy {
+        color: rgba(11, 37, 69, 0.9);
+      }
+      .hero-copy h1 {
+        color: #0b2545;
+      }
+      .hero-copy p {
+        color: rgba(11, 37, 69, 0.78);
+      }
+      .hero-copy-body {
+        color: rgba(11, 37, 69, 0.78);
+      }
+      .hero-copy .hero-lead-badge {
+        color: rgba(11, 37, 69, 0.7);
+      }
+      .hero-copy .hero-lead-badge .material-icons {
+        color: rgba(18, 118, 209, 0.9);
+      }
       .hero-lead-badge {
         background: linear-gradient(135deg, rgba(255, 255, 255, 0.32), rgba(255, 255, 255, 0.14));
         border: 1px solid rgba(255, 255, 255, 0.35);
@@ -239,17 +303,17 @@
       }
       .hero-secondary-cta {
         border-radius: 9999px;
-        border: 1px solid rgba(255, 255, 255, 0.6);
+        border: 1px solid rgba(11, 37, 69, 0.15);
         padding: 0.85rem 2rem;
         font-size: 0.95rem;
-        color: #ffffff;
-        background: rgba(255, 255, 255, 0.06);
-        backdrop-filter: blur(8px);
+        color: rgba(11, 37, 69, 0.88);
+        background: rgba(255, 255, 255, 0.75);
+        backdrop-filter: blur(6px);
         transition: transform 0.35s ease, background 0.35s ease;
       }
       .hero-secondary-cta:hover {
         transform: translateY(-6px);
-        background: rgba(255, 255, 255, 0.16);
+        background: rgba(255, 255, 255, 0.92);
       }
       .hero-accent-cta {
         border-radius: 9999px;
@@ -554,9 +618,9 @@
         <section id="anasayfa" class="hero-area relative overflow-hidden">
           <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 md:py-36">
             <div class="grid lg:grid-cols-2 gap-12 items-center">
-              <div class="space-y-6 text-white relative z-10 fade-up">
+              <div class="space-y-6 relative z-10 fade-up hero-copy">
                 <a
-                  class="inline-flex items-center gap-3 rounded-full hero-lead-badge px-5 py-2.5 text-sm uppercase tracking-[0.35em] text-white transition hover:bg-white/30"
+                  class="inline-flex items-center gap-3 rounded-full hero-lead-badge px-5 py-2.5 text-sm uppercase tracking-[0.35em] transition hover:bg-white/30"
                   href="#iletisim"
                 >
                   <span class="material-icons text-base">flash_on</span>
@@ -565,7 +629,7 @@
                 <h1 class="text-4xl md:text-6xl font-extrabold leading-tight">
                   Geleceğin enerjisini <span class="text-solingen-green">bugün</span> deneyimleyin
                 </h1>
-                <p class="text-lg md:text-xl text-white/80 leading-relaxed">
+                <p class="text-lg md:text-xl leading-relaxed hero-copy-body">
                   Solingen Energy, güneş ve yenilenebilir enerji projelerinde canlı, cesur ve etkileyici çözümler sunar. Çevreci teknolojilerimizle işletmenizi ve yaşam alanınızı ışık hızında dönüştürün.
                 </p>
                 <div class="flex flex-wrap gap-4">
