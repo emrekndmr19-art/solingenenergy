@@ -72,9 +72,7 @@
         background: linear-gradient(135deg, rgba(225, 245, 255, 0.95), rgba(188, 230, 255, 0.93));
       }
       .footer-logo::before {
-        background: linear-gradient(135deg, rgba(255, 255, 255, 0.95), rgba(229, 245, 255, 0.92));
-        border: 1px solid rgba(255, 255, 255, 0.55);
-        box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.65);
+        background: linear-gradient(135deg, rgba(225, 245, 255, 0.95), rgba(188, 230, 255, 0.93));
       }
       .brand-logo {
         width: 150px;
@@ -163,6 +161,52 @@
       }
       .header-toggle:hover {
         background: rgba(18, 118, 209, 0.14);
+      }
+      .footer-shell {
+        position: relative;
+        background: linear-gradient(135deg, rgba(255, 255, 255, 0.95), rgba(229, 245, 255, 0.92));
+        box-shadow: 0 -18px 40px rgba(9, 48, 82, 0.1);
+        border-radius: 36px 36px 0 0;
+        overflow: hidden;
+        backdrop-filter: blur(10px);
+      }
+      .footer-shell::before {
+        content: "";
+        position: absolute;
+        inset: auto -15% -60% 55%;
+        height: 120%;
+        background: radial-gradient(circle, rgba(18, 118, 209, 0.18), transparent 70%);
+        pointer-events: none;
+      }
+      .footer-menu-link {
+        color: rgba(11, 37, 69, 0.78);
+        transition: color 0.3s ease;
+      }
+      .footer-menu-link:hover {
+        color: rgba(18, 118, 209, 0.9);
+      }
+      .footer-meta-link {
+        color: rgba(11, 37, 69, 0.6);
+        transition: color 0.3s ease;
+      }
+      .footer-meta-link:hover {
+        color: rgba(18, 118, 209, 0.9);
+      }
+      .footer-contact-icon {
+        background: rgba(18, 118, 209, 0.12);
+        border: 1px solid rgba(18, 118, 209, 0.18);
+        color: rgba(11, 37, 69, 0.85);
+      }
+      .footer-contact-icon:hover {
+        background: rgba(18, 118, 209, 0.2);
+        box-shadow: 0 12px 30px rgba(9, 48, 82, 0.2);
+      }
+      .footer-contact-icon.contact-icon--whatsapp {
+        background: linear-gradient(135deg, rgba(18, 118, 209, 0.14), rgba(17, 179, 162, 0.22));
+        border: 1px solid rgba(18, 118, 209, 0.24);
+      }
+      .footer-contact-icon.contact-icon--whatsapp:hover {
+        background: linear-gradient(135deg, rgba(18, 118, 209, 0.22), rgba(17, 179, 162, 0.3));
       }
       .hero-area {
         position: relative;
@@ -864,74 +908,75 @@
         </section>
       </main>
 
-      <footer class="relative overflow-hidden bg-solingen-dark text-white">
-        <div class="absolute inset-0" style="background: linear-gradient(135deg, rgba(18,118,209,0.4), rgba(17,179,162,0.4)); opacity: 0.35;"></div>
-        <div class="relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-          <div class="grid gap-12 md:grid-cols-2 lg:grid-cols-4">
-            <div>
-              <h4 class="text-lg font-semibold">Solingen Energy</h4>
-              <p class="mt-3 text-sm text-white/70">
-                Akıllı ve yenilikçi enerji çözümlerimizle sürdürülebilirliği merkezine alan projeler tasarlıyoruz.
-              </p>
-              <div class="mt-6 flex flex-wrap items-center gap-4">
-                <div class="logo-wrapper logo-badge footer-logo">
-                  <img class="brand-logo footer-brand-logo" src="assets/logom2png.png" alt="Solingen Energy tam logotayp" />
+      <footer class="relative z-30 mt-24">
+        <div class="footer-shell">
+          <div class="relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-16 text-solingen-dark">
+            <div class="grid gap-12 md:grid-cols-2 lg:grid-cols-4">
+              <div>
+                <h4 class="text-lg font-semibold">Solingen Energy</h4>
+                <p class="mt-3 text-sm text-solingen-dark/70">
+                  Akıllı ve yenilikçi enerji çözümlerimizle sürdürülebilirliği merkezine alan projeler tasarlıyoruz.
+                </p>
+                <div class="mt-6 flex flex-wrap items-center gap-4">
+                  <div class="logo-wrapper logo-badge footer-logo">
+                    <img class="brand-logo footer-brand-logo" src="assets/logom2png.png" alt="Solingen Energy tam logotayp" />
+                  </div>
+                </div>
+              </div>
+              <div>
+                <h4 class="text-lg font-semibold">Hızlı Menü</h4>
+                <ul class="mt-3 space-y-2 text-sm">
+                  <li><a class="footer-menu-link" href="#anasayfa">Ana Sayfa</a></li>
+                  <li><a class="footer-menu-link" href="#biz-kimiz">Hakkımızda</a></li>
+                  <li><a class="footer-menu-link" href="#faaliyetler">Faaliyetlerimiz</a></li>
+                  <li><a class="footer-menu-link" href="#cozumler">Çözümlerimiz</a></li>
+                </ul>
+              </div>
+              <div>
+                <h4 class="text-lg font-semibold">Faaliyetlerimiz</h4>
+                <ul class="mt-3 space-y-2 text-sm text-solingen-dark/75">
+                  <li>Güneş Enerjisi Projeleri</li>
+                  <li>Tarım Güneş Projeleri</li>
+                  <li>Otomatik Sulama Sistemleri</li>
+                  <li>Hibrit Enerji Çözümleri</li>
+                </ul>
+              </div>
+              <div>
+                <h4 class="text-lg font-semibold">İletişim</h4>
+                <p class="mt-3 text-sm text-solingen-dark/70">
+                  Bize dilediğiniz zaman ulaşın. Enerji projeleriniz için hızlı yanıt veriyoruz.
+                </p>
+                <a class="mt-4 inline-flex items-center gap-2 text-sm font-semibold text-solingen-blue hover:text-solingen-dark transition" href="mailto:info@solingenenergy.com">
+                  <span class="material-icons text-base">mail</span>
+                  info@solingenenergy.com
+                </a>
+                <div class="mt-6 flex items-center gap-3">
+                  <a class="contact-icon footer-contact-icon" href="https://www.instagram.com/solingenenergy" target="_blank" rel="noopener">
+                    <img class="h-5 w-5" src="assets/instagram.png" alt="Instagram" />
+                    <span class="sr-only">Instagram</span>
+                  </a>
+                  <a class="contact-icon footer-contact-icon" href="https://x.com/solingenenergy" target="_blank" rel="noopener">
+                    <img class="h-5 w-5" src="assets/logos.png" alt="X (Twitter)" />
+                    <span class="sr-only">X (Twitter)</span>
+                  </a>
+                  <a class="contact-icon footer-contact-icon contact-icon--whatsapp" href="https://wa.me/905462854515" target="_blank" rel="noopener">
+                    <img class="whatsapp-icon" src="assets/whatsapp.png" alt="WhatsApp 0546 285 45 15" />
+                    <span class="sr-only">WhatsApp 0546 285 45 15</span>
+                  </a>
+                  <a class="contact-icon footer-contact-icon" href="tel:+905074085082">
+                    <span class="material-icons text-xl">call</span>
+                    <span class="sr-only">Telefon 0507 408 50 82</span>
+                  </a>
                 </div>
               </div>
             </div>
-            <div>
-              <h4 class="text-lg font-semibold">Hızlı Menü</h4>
-              <ul class="mt-3 space-y-2 text-sm text-white/70">
-                <li><a class="hover:text-white transition" href="#anasayfa">Ana Sayfa</a></li>
-                <li><a class="hover:text-white transition" href="#biz-kimiz">Hakkımızda</a></li>
-                <li><a class="hover:text-white transition" href="#faaliyetler">Faaliyetlerimiz</a></li>
-                <li><a class="hover:text-white transition" href="#cozumler">Çözümlerimiz</a></li>
-              </ul>
-            </div>
-            <div>
-              <h4 class="text-lg font-semibold">Faaliyetlerimiz</h4>
-              <ul class="mt-3 space-y-2 text-sm text-white/70">
-                <li>Güneş Enerjisi Projeleri</li>
-                <li>Tarım Güneş Projeleri</li>
-                <li>Otomatik Sulama Sistemleri</li>
-                <li>Hibrit Enerji Çözümleri</li>
-              </ul>
-            </div>
-            <div>
-              <h4 class="text-lg font-semibold">İletişim</h4>
-              <p class="mt-3 text-sm text-white/70">
-                Bize dilediğiniz zaman ulaşın. Enerji projeleriniz için hızlı yanıt veriyoruz.
-              </p>
-              <a class="mt-4 inline-flex items-center gap-2 text-sm font-semibold text-white hover:text-solingen-green transition" href="mailto:info@solingenenergy.com">
-                <span class="material-icons text-base">mail</span>
-                info@solingenenergy.com
-              </a>
-              <div class="mt-6 flex items-center gap-3">
-                <a class="contact-icon" href="https://www.instagram.com/solingenenergy" target="_blank" rel="noopener">
-                  <img class="h-5 w-5" src="assets/instagram.png" alt="Instagram" />
-                  <span class="sr-only">Instagram</span>
-                </a>
-                <a class="contact-icon" href="https://x.com/solingenenergy" target="_blank" rel="noopener">
-                  <img class="h-5 w-5" src="assets/logos.png" alt="X (Twitter)" />
-                  <span class="sr-only">X (Twitter)</span>
-                </a>
-                <a class="contact-icon contact-icon--whatsapp" href="https://wa.me/905462854515" target="_blank" rel="noopener">
-                  <img class="whatsapp-icon" src="assets/whatsapp.png" alt="WhatsApp 0546 285 45 15" />
-                  <span class="sr-only">WhatsApp 0546 285 45 15</span>
-                </a>
-                <a class="contact-icon" href="tel:+905074085082">
-                  <span class="material-icons text-xl">call</span>
-                  <span class="sr-only">Telefon 0507 408 50 82</span>
-                </a>
+            <div class="mt-12 flex flex-wrap items-center justify-between gap-4 text-xs text-solingen-dark/60">
+              <p>© 2024 Solingen Energy. Tüm hakları saklıdır.</p>
+              <div class="flex items-center gap-4">
+                <a class="footer-meta-link" href="kvkk.html">KVKK</a>
+                <a class="footer-meta-link" href="cerez-politikasi.html">Çerez Politikası</a>
+                <a class="footer-meta-link" href="aydinlatma-metni.html">Aydınlatma Metni</a>
               </div>
-            </div>
-          </div>
-          <div class="mt-12 flex flex-wrap items-center justify-between gap-4 text-xs text-white/60">
-            <p>© 2024 Solingen Energy. Tüm hakları saklıdır.</p>
-            <div class="flex items-center gap-4">
-              <a class="hover:text-white transition" href="kvkk.html">KVKK</a>
-              <a class="hover:text-white transition" href="cerez-politikasi.html">Çerez Politikası</a>
-              <a class="hover:text-white transition" href="aydinlatma-metni.html">Aydınlatma Metni</a>
             </div>
           </div>
         </div>
