@@ -1241,7 +1241,7 @@
 
           try {
             const encodedPayload = buildEncodedFormPayload(contactForm);
-            const submissionEndpoint = window.location && window.location.pathname ? window.location.pathname : "/";
+            const submissionEndpoint = "/";
             const response = await fetch(submissionEndpoint, {
               method: "POST",
               headers: { "Content-Type": "application/x-www-form-urlencoded" },
