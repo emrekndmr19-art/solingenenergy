@@ -787,9 +787,9 @@
                 </p>
               </div>
               <div class="grid-card p-8 fade-up">
-                <h3 class="text-2xl font-semibold text-solingen-teal">Hibrit Enerji Sistemleri</h3>
+                <h3 class="text-2xl font-semibold text-solingen-teal">Araç Şarj İstasyonları</h3>
                 <p class="mt-3 text-solingen-dark/70">
-                  Şebeke, güneş ve jeneratör kaynaklarını birlikte yöneterek kesintisiz enerji sağlayan hibrit altyapılar kuruyoruz.
+                  Elektrikli araç filonuz veya müşterileriniz için hızlı, güvenli ve ölçeklenebilir şarj altyapıları planlıyor ve kuruyoruz.
                 </p>
               </div>
             </div>
@@ -913,7 +913,7 @@
                   Güneş enerjisi yatırımlarınızı uçtan uca tasarlıyor, mühendislikten bakıma kadar yönetiyoruz.
                 </h2>
                 <p class="text-lg text-white/80">
-                  Projelendirme, finansman danışmanlığı, kurulum, izleme ve bakım süreçlerini tek çatı altında topluyoruz. Hibrit çözümler, enerji depolama sistemleri ve yeşil sertifika danışmanlığı ile işinizi büyütüyoruz.
+                  Projelendirme, finansman danışmanlığı, kurulum, izleme ve bakım süreçlerini tek çatı altında topluyoruz. Araç şarj altyapıları, enerji depolama sistemleri ve yeşil sertifika danışmanlığı ile işinizi büyütüyoruz.
                 </p>
                 <div class="grid gap-4 sm:grid-cols-2">
                   <div class="rounded-2xl bg-white/10 p-5">
@@ -935,11 +935,28 @@
                 <p class="text-base text-solingen-dark/70">
                   Günlük enerji tüketiminizi paylaşın, tasarruf ve yatırım planınızı aynı gün iletelim.
                 </p>
-                <form class="grid gap-4" id="iletisim">
-                  <input class="rounded-2xl border border-solingen-blue/20 px-4 py-3 focus:border-solingen-blue focus:ring-2 focus:ring-solingen-green/40" placeholder="Adınız Soyadınız" type="text" />
-                  <input class="rounded-2xl border border-solingen-blue/20 px-4 py-3 focus:border-solingen-blue focus:ring-2 focus:ring-solingen-green/40" placeholder="E-posta adresiniz" type="email" />
-                  <input class="rounded-2xl border border-solingen-blue/20 px-4 py-3 focus:border-solingen-blue focus:ring-2 focus:ring-solingen-green/40" placeholder="Telefon Numaranız" type="tel" />
-                  <select class="rounded-2xl border border-solingen-blue/20 px-4 py-3 focus:border-solingen-blue focus:ring-2 focus:ring-solingen-green/40">
+                <form
+                  class="grid gap-4"
+                  id="iletisim"
+                  name="iletisim"
+                  method="post"
+                  action="tesekkurler.html"
+                  data-netlify="true"
+                  data-netlify-honeypot="bot-field"
+                  netlify
+                  netlify-honeypot="bot-field"
+                >
+                  <input type="hidden" name="form-name" value="iletisim" />
+                  <p hidden>
+                    <label>
+                      Lütfen bu alanı boş bırakın:
+                      <input name="bot-field" />
+                    </label>
+                  </p>
+                  <input class="rounded-2xl border border-solingen-blue/20 px-4 py-3 focus:border-solingen-blue focus:ring-2 focus:ring-solingen-green/40" name="adSoyad" placeholder="Adınız Soyadınız" type="text" />
+                  <input class="rounded-2xl border border-solingen-blue/20 px-4 py-3 focus:border-solingen-blue focus:ring-2 focus:ring-solingen-green/40" name="email" placeholder="E-posta adresiniz" type="email" />
+                  <input class="rounded-2xl border border-solingen-blue/20 px-4 py-3 focus:border-solingen-blue focus:ring-2 focus:ring-solingen-green/40" name="telefon" placeholder="Telefon Numaranız" type="tel" />
+                  <select class="rounded-2xl border border-solingen-blue/20 px-4 py-3 focus:border-solingen-blue focus:ring-2 focus:ring-solingen-green/40" name="kullanim_zamani">
                     <option>Elektriği en yoğun kullandığınız zaman?</option>
                     <option>Sabah</option>
                     <option>Gündüz</option>
@@ -962,8 +979,14 @@
                       </label>
                     </div>
                   </fieldset>
-                  <textarea class="min-h-[120px] rounded-2xl border border-solingen-blue/20 px-4 py-3 focus:border-solingen-blue focus:ring-2 focus:ring-solingen-green/40" placeholder="Mesajınız"></textarea>
-                  <button class="mt-2 inline-flex items-center justify-center gap-3 rounded-full bg-solingen-blue px-8 py-3.5 text-lg font-semibold text-white shadow-neon transition transform hover:-translate-y-1" type="submit">
+                  <textarea class="min-h-[120px] rounded-2xl border border-solingen-blue/20 px-4 py-3 focus:border-solingen-blue focus:ring-2 focus:ring-solingen-green/40" name="mesaj" placeholder="Mesajınız"></textarea>
+                  <p
+                    class="hidden rounded-2xl border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-700"
+                    data-form-status
+                    role="alert"
+                    aria-live="polite"
+                  ></p>
+                  <button class="mt-2 inline-flex items-center justify-center gap-3 rounded-full bg-solingen-blue px-8 py-3.5 text-lg font-semibold text-white shadow-neon transition transform hover:-translate-y-1" type="submit" data-submit-button>
                     Teklifimi Gönder
                     <span class="material-icons text-base">send</span>
                   </button>
@@ -1004,7 +1027,7 @@
                   <li>Güneş Enerjisi Projeleri</li>
                   <li>Tarım Güneş Projeleri</li>
                   <li>Otomatik Sulama Sistemleri</li>
-                  <li>Hibrit Enerji Çözümleri</li>
+                  <li>Araç Şarj İstasyonları</li>
                 </ul>
               </div>
               <div>
@@ -1144,6 +1167,96 @@
       };
 
       animateNumbers(document.querySelectorAll(".number"));
+
+      const encodeFormData = (formData) => {
+        const encoded = new URLSearchParams();
+        formData.forEach((value, key) => {
+          const isFileObject = typeof File !== "undefined" && value instanceof File;
+          if (isFileObject) {
+            encoded.append(key, value.name);
+          } else {
+            const normalizedValue = typeof value === "string" ? value : String(value ?? "");
+            encoded.append(key, normalizedValue);
+          }
+        });
+        return encoded.toString();
+      };
+
+      const contactForm = document.getElementById("iletisim");
+
+      if (contactForm) {
+        const submitButton = contactForm.querySelector("[data-submit-button]");
+        const statusMessage = contactForm.querySelector("[data-form-status]");
+        const originalButtonContent = submitButton ? submitButton.innerHTML : "";
+
+        const setButtonLoadingState = (isLoading) => {
+          if (!submitButton) {
+            return;
+          }
+
+          if (isLoading) {
+            submitButton.disabled = true;
+            submitButton.classList.add("opacity-75", "cursor-not-allowed");
+            submitButton.innerHTML =
+              '<span class="material-icons text-base animate-spin">autorenew</span> Gönderiliyor';
+          } else {
+            submitButton.disabled = false;
+            submitButton.classList.remove("opacity-75", "cursor-not-allowed");
+            submitButton.innerHTML = originalButtonContent;
+          }
+        };
+
+        contactForm.addEventListener("submit", async (event) => {
+          event.preventDefault();
+
+          if (statusMessage) {
+            statusMessage.classList.add("hidden");
+            statusMessage.textContent = "";
+          }
+
+          setButtonLoadingState(true);
+          let shouldResetButton = true;
+
+          try {
+            const formData = new FormData(contactForm);
+            const response = await fetch("/", {
+              method: "POST",
+              headers: { "Content-Type": "application/x-www-form-urlencoded" },
+              body: encodeFormData(formData),
+            });
+
+            if (!response.ok) {
+              const error = new Error("Form gönderimi başarısız oldu");
+              error.status = response.status;
+              throw error;
+            }
+
+            const redirectTarget = contactForm.getAttribute("action") || "/";
+            shouldResetButton = false;
+            window.location.assign(redirectTarget);
+            return;
+          } catch (error) {
+            if (statusMessage) {
+              console.error("Form submission failed", error);
+              let assistanceMessage =
+                "Form gönderilirken bir sorun oluştu. Lütfen daha sonra tekrar deneyin veya info@solingenenergy.com adresinden bizimle iletişime geçin.";
+
+              if (error?.status === 405) {
+                assistanceMessage =
+                  'Sunucu form gönderimini reddetti (405 - Method Not Allowed). Netlify form entegrasyonunun etkinleştirilmesi gerekiyor. Lütfen Netlify panelinden formu yayınlamak için ilgili göreve yönelin ya da <a class="font-semibold underline" href="mailto:info@solingenenergy.com?subject=Form%20gonderim%20sorunu">info@solingenenergy.com</a> adresine e-posta gönderin.';
+              }
+
+              statusMessage.innerHTML = assistanceMessage;
+              statusMessage.classList.remove("hidden");
+              statusMessage.scrollIntoView({ behavior: "smooth", block: "center" });
+            }
+          } finally {
+            if (shouldResetButton) {
+              setButtonLoadingState(false);
+            }
+          }
+        });
+      }
     </script>
   </body>
 </html>
