@@ -1168,7 +1168,18 @@
 
       animateNumbers(document.querySelectorAll(".number"));
 
-      const encodeFormData = (formData) => {
+      const buildEncodedFormPayload = (formElement) => {
+        const formData = new FormData(formElement);
+        const explicitFormName =
+          formElement.getAttribute("name") ||
+          formElement.getAttribute("data-form-name") ||
+          formElement.querySelector('[name="form-name"]')?.value ||
+          "";
+
+        if (explicitFormName) {
+          formData.set("form-name", explicitFormName);
+        }
+
         const encoded = new URLSearchParams();
         formData.forEach((value, key) => {
           const isFileObject = typeof File !== "undefined" && value instanceof File;
@@ -1179,6 +1190,7 @@
             encoded.append(key, normalizedValue);
           }
         });
+
         return encoded.toString();
       };
 
@@ -1218,11 +1230,11 @@
           let shouldResetButton = true;
 
           try {
-            const formData = new FormData(contactForm);
+            const encodedPayload = buildEncodedFormPayload(contactForm);
             const response = await fetch("/", {
               method: "POST",
               headers: { "Content-Type": "application/x-www-form-urlencoded" },
-              body: encodeFormData(formData),
+              body: encodedPayload,
             });
 
             if (!response.ok) {
@@ -1236,6 +1248,12 @@
             window.location.assign(redirectTarget);
             return;
           } catch (error) {
+            if (error?.status === 405) {
+              shouldResetButton = false;
+              contactForm.submit();
+              return;
+            }
+
             if (statusMessage) {
               console.error("Form submission failed", error);
               let assistanceMessage =
