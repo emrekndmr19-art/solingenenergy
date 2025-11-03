@@ -1168,7 +1168,18 @@
 
       animateNumbers(document.querySelectorAll(".number"));
 
-      const encodeFormData = (formData) => {
+      const buildEncodedFormPayload = (formElement) => {
+        const formData = new FormData(formElement);
+        const explicitFormName =
+          formElement.getAttribute("name") ||
+          formElement.getAttribute("data-form-name") ||
+          formElement.querySelector('[name="form-name"]')?.value ||
+          "";
+
+        if (explicitFormName) {
+          formData.set("form-name", explicitFormName);
+        }
+
         const encoded = new URLSearchParams();
         formData.forEach((value, key) => {
           const isFileObject = typeof File !== "undefined" && value instanceof File;
@@ -1179,6 +1190,7 @@
             encoded.append(key, normalizedValue);
           }
         });
+
         return encoded.toString();
       };
 
@@ -1206,6 +1218,16 @@
           }
         };
 
+        const showStatusMessage = (message) => {
+          if (!statusMessage) {
+            return;
+          }
+
+          statusMessage.innerHTML = message;
+          statusMessage.classList.remove("hidden");
+          statusMessage.scrollIntoView({ behavior: "smooth", block: "center" });
+        };
+
         contactForm.addEventListener("submit", async (event) => {
           event.preventDefault();
 
@@ -1218,11 +1240,11 @@
           let shouldResetButton = true;
 
           try {
-            const formData = new FormData(contactForm);
+            const encodedPayload = buildEncodedFormPayload(contactForm);
             const response = await fetch("/", {
               method: "POST",
               headers: { "Content-Type": "application/x-www-form-urlencoded" },
-              body: encodeFormData(formData),
+              body: encodedPayload,
             });
 
             if (!response.ok) {
@@ -1236,19 +1258,19 @@
             window.location.assign(redirectTarget);
             return;
           } catch (error) {
+            if (error?.status === 405) {
+              showStatusMessage(
+                'Sunucu form gönderimini reddetti (405 - Method Not Allowed). Netlify form entegrasyonunun henüz etkinleştirilmediğini veya formun son dağıtıma dahil edilmediğini gösterir. Lütfen Netlify panelinde formu yayınlayıp yeni bir dağıtım yaptıktan sonra tekrar deneyin.'
+              );
+              return;
+            }
+
             if (statusMessage) {
               console.error("Form submission failed", error);
               let assistanceMessage =
                 "Form gönderilirken bir sorun oluştu. Lütfen daha sonra tekrar deneyin veya info@solingenenergy.com adresinden bizimle iletişime geçin.";
 
-              if (error?.status === 405) {
-                assistanceMessage =
-                  'Sunucu form gönderimini reddetti (405 - Method Not Allowed). Netlify form entegrasyonunun etkinleştirilmesi gerekiyor. Lütfen Netlify panelinden formu yayınlamak için ilgili göreve yönelin ya da <a class="font-semibold underline" href="mailto:info@solingenenergy.com?subject=Form%20gonderim%20sorunu">info@solingenenergy.com</a> adresine e-posta gönderin.';
-              }
-
-              statusMessage.innerHTML = assistanceMessage;
-              statusMessage.classList.remove("hidden");
-              statusMessage.scrollIntoView({ behavior: "smooth", block: "center" });
+              showStatusMessage(assistanceMessage);
             }
           } finally {
             if (shouldResetButton) {
