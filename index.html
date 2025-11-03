@@ -935,9 +935,16 @@
                 <p class="text-base text-solingen-dark/70">
                   Günlük enerji tüketiminizi paylaşın, tasarruf ve yatırım planınızı aynı gün iletelim.
                 </p>
-                <form class="grid gap-4" id="iletisim" name="iletisim" method="POST" data-netlify="true" netlify-honeypot="bot-field">
+                <form
+                  class="grid gap-4"
+                  id="iletisim"
+                  name="iletisim"
+                  method="post"
+                  data-netlify="true"
+                  data-netlify-honeypot="bot-field"
+                >
                   <input type="hidden" name="form-name" value="iletisim" />
-                  <p class="hidden">
+                  <p hidden>
                     <label>
                       Lütfen bu alanı boş bırakın:
                       <input name="bot-field" />
