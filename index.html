@@ -935,11 +935,18 @@
                 <p class="text-base text-solingen-dark/70">
                   Günlük enerji tüketiminizi paylaşın, tasarruf ve yatırım planınızı aynı gün iletelim.
                 </p>
-                <form class="grid gap-4" id="iletisim">
-                  <input class="rounded-2xl border border-solingen-blue/20 px-4 py-3 focus:border-solingen-blue focus:ring-2 focus:ring-solingen-green/40" placeholder="Adınız Soyadınız" type="text" />
-                  <input class="rounded-2xl border border-solingen-blue/20 px-4 py-3 focus:border-solingen-blue focus:ring-2 focus:ring-solingen-green/40" placeholder="E-posta adresiniz" type="email" />
-                  <input class="rounded-2xl border border-solingen-blue/20 px-4 py-3 focus:border-solingen-blue focus:ring-2 focus:ring-solingen-green/40" placeholder="Telefon Numaranız" type="tel" />
-                  <select class="rounded-2xl border border-solingen-blue/20 px-4 py-3 focus:border-solingen-blue focus:ring-2 focus:ring-solingen-green/40">
+                <form class="grid gap-4" id="iletisim" name="iletisim" method="POST" data-netlify="true" netlify-honeypot="bot-field">
+                  <input type="hidden" name="form-name" value="iletisim" />
+                  <p class="hidden">
+                    <label>
+                      Lütfen bu alanı boş bırakın:
+                      <input name="bot-field" />
+                    </label>
+                  </p>
+                  <input class="rounded-2xl border border-solingen-blue/20 px-4 py-3 focus:border-solingen-blue focus:ring-2 focus:ring-solingen-green/40" name="adSoyad" placeholder="Adınız Soyadınız" type="text" />
+                  <input class="rounded-2xl border border-solingen-blue/20 px-4 py-3 focus:border-solingen-blue focus:ring-2 focus:ring-solingen-green/40" name="email" placeholder="E-posta adresiniz" type="email" />
+                  <input class="rounded-2xl border border-solingen-blue/20 px-4 py-3 focus:border-solingen-blue focus:ring-2 focus:ring-solingen-green/40" name="telefon" placeholder="Telefon Numaranız" type="tel" />
+                  <select class="rounded-2xl border border-solingen-blue/20 px-4 py-3 focus:border-solingen-blue focus:ring-2 focus:ring-solingen-green/40" name="kullanim_zamani">
                     <option>Elektriği en yoğun kullandığınız zaman?</option>
                     <option>Sabah</option>
                     <option>Gündüz</option>
@@ -962,7 +969,7 @@
                       </label>
                     </div>
                   </fieldset>
-                  <textarea class="min-h-[120px] rounded-2xl border border-solingen-blue/20 px-4 py-3 focus:border-solingen-blue focus:ring-2 focus:ring-solingen-green/40" placeholder="Mesajınız"></textarea>
+                  <textarea class="min-h-[120px] rounded-2xl border border-solingen-blue/20 px-4 py-3 focus:border-solingen-blue focus:ring-2 focus:ring-solingen-green/40" name="mesaj" placeholder="Mesajınız"></textarea>
                   <button class="mt-2 inline-flex items-center justify-center gap-3 rounded-full bg-solingen-blue px-8 py-3.5 text-lg font-semibold text-white shadow-neon transition transform hover:-translate-y-1" type="submit">
                     Teklifimi Gönder
                     <span class="material-icons text-base">send</span>
