@@ -940,8 +940,11 @@
                   id="iletisim"
                   name="iletisim"
                   method="post"
+                  action="tesekkurler.html"
                   data-netlify="true"
                   data-netlify-honeypot="bot-field"
+                  netlify
+                  netlify-honeypot="bot-field"
                 >
                   <input type="hidden" name="form-name" value="iletisim" />
                   <p hidden>
@@ -977,7 +980,13 @@
                     </div>
                   </fieldset>
                   <textarea class="min-h-[120px] rounded-2xl border border-solingen-blue/20 px-4 py-3 focus:border-solingen-blue focus:ring-2 focus:ring-solingen-green/40" name="mesaj" placeholder="Mesajınız"></textarea>
-                  <button class="mt-2 inline-flex items-center justify-center gap-3 rounded-full bg-solingen-blue px-8 py-3.5 text-lg font-semibold text-white shadow-neon transition transform hover:-translate-y-1" type="submit">
+                  <p
+                    class="hidden rounded-2xl border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-700"
+                    data-form-status
+                    role="alert"
+                    aria-live="polite"
+                  ></p>
+                  <button class="mt-2 inline-flex items-center justify-center gap-3 rounded-full bg-solingen-blue px-8 py-3.5 text-lg font-semibold text-white shadow-neon transition transform hover:-translate-y-1" type="submit" data-submit-button>
                     Teklifimi Gönder
                     <span class="material-icons text-base">send</span>
                   </button>
@@ -1158,6 +1167,86 @@
       };
 
       animateNumbers(document.querySelectorAll(".number"));
+
+      const encodeFormData = (formData) => {
+        const encoded = new URLSearchParams();
+        formData.forEach((value, key) => {
+          const isFileObject = typeof File !== "undefined" && value instanceof File;
+          if (isFileObject) {
+            encoded.append(key, value.name);
+          } else {
+            const normalizedValue = typeof value === "string" ? value : String(value ?? "");
+            encoded.append(key, normalizedValue);
+          }
+        });
+        return encoded.toString();
+      };
+
+      const contactForm = document.getElementById("iletisim");
+
+      if (contactForm) {
+        const submitButton = contactForm.querySelector("[data-submit-button]");
+        const statusMessage = contactForm.querySelector("[data-form-status]");
+        const originalButtonContent = submitButton ? submitButton.innerHTML : "";
+
+        const setButtonLoadingState = (isLoading) => {
+          if (!submitButton) {
+            return;
+          }
+
+          if (isLoading) {
+            submitButton.disabled = true;
+            submitButton.classList.add("opacity-75", "cursor-not-allowed");
+            submitButton.innerHTML =
+              '<span class="material-icons text-base animate-spin">autorenew</span> Gönderiliyor';
+          } else {
+            submitButton.disabled = false;
+            submitButton.classList.remove("opacity-75", "cursor-not-allowed");
+            submitButton.innerHTML = originalButtonContent;
+          }
+        };
+
+        contactForm.addEventListener("submit", async (event) => {
+          event.preventDefault();
+
+          if (statusMessage) {
+            statusMessage.classList.add("hidden");
+            statusMessage.textContent = "";
+          }
+
+          setButtonLoadingState(true);
+          let shouldResetButton = true;
+
+          try {
+            const formData = new FormData(contactForm);
+            const response = await fetch("/", {
+              method: "POST",
+              headers: { "Content-Type": "application/x-www-form-urlencoded" },
+              body: encodeFormData(formData),
+            });
+
+            if (!response.ok) {
+              throw new Error("Form gönderimi başarısız oldu");
+            }
+
+            const redirectTarget = contactForm.getAttribute("action") || "/";
+            shouldResetButton = false;
+            window.location.assign(redirectTarget);
+            return;
+          } catch (error) {
+            if (statusMessage) {
+              statusMessage.textContent =
+                "Form gönderilirken bir sorun oluştu. Lütfen daha sonra tekrar deneyin veya info@solingenenergy.com adresinden bizimle iletişime geçin.";
+              statusMessage.classList.remove("hidden");
+              statusMessage.scrollIntoView({ behavior: "smooth", block: "center" });
+            }
+          } finally {
+            if (shouldResetButton) {
+              setButtonLoadingState(false);
+            }
+          }
+        });
+      }
     </script>
   </body>
 </html>

@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="tr">
+  <head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Teşekkürler | Solingen Energy</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <script>
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "solingen-blue": "#1276d1",
+              "solingen-teal": "#11b3a2",
+              "solingen-green": "#6ddb6c",
+              "solingen-dark": "#0b2545",
+              "solingen-light": "#effbff",
+            },
+            boxShadow: {
+              neon: "0 10px 40px rgba(18,118,209,0.35)",
+            },
+          },
+        },
+      };
+    </script>
+    <style>
+      body {
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: radial-gradient(circle at 22% 10%, #134c88 0%, #1276d1 30%, #11b3a2 58%, #06213d 100%);
+        font-family: "Poppins", sans-serif;
+        color: #0b2545;
+      }
+      .card {
+        background: linear-gradient(145deg, rgba(255, 255, 255, 0.96), rgba(231, 247, 255, 0.94));
+        border-radius: 32px;
+        padding: 3rem 2.5rem;
+        box-shadow: 0 30px 70px rgba(5, 24, 46, 0.35);
+        max-width: 480px;
+        width: min(92vw, 480px);
+        text-align: center;
+      }
+      .pulse-ring {
+        position: relative;
+        width: 88px;
+        height: 88px;
+        margin: 0 auto 1.5rem;
+      }
+      .pulse-ring::before,
+      .pulse-ring::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        border-radius: 999px;
+        border: 2px solid rgba(18, 118, 209, 0.25);
+        animation: pulse 2.6s ease-in-out infinite;
+      }
+      .pulse-ring::after {
+        animation-delay: 1.3s;
+      }
+      @keyframes pulse {
+        0% {
+          transform: scale(0.75);
+          opacity: 0.9;
+        }
+        100% {
+          transform: scale(1.6);
+          opacity: 0;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main class="card">
+      <div class="pulse-ring">
+        <div class="flex h-full w-full items-center justify-center rounded-full bg-solingen-blue text-white shadow-neon">
+          <span class="material-icons text-4xl">task_alt</span>
+        </div>
+      </div>
+      <h1 class="text-3xl font-bold text-solingen-dark">Mesajınızı Aldık</h1>
+      <p class="mt-4 text-base text-solingen-dark/70">
+        Talebiniz bize başarıyla ulaştı. Enerji uzmanlarımız en kısa sürede sizinle iletişime geçecek.
+      </p>
+      <p class="mt-2 text-sm text-solingen-dark/60">
+        <span id="redirect-count">8</span> saniye içinde ana sayfaya yönlendirileceksiniz.
+      </p>
+      <div class="mt-6 flex flex-col gap-3">
+        <a
+          class="inline-flex items-center justify-center gap-2 rounded-full bg-solingen-blue px-6 py-3 text-white font-semibold shadow-neon transition hover:-translate-y-1"
+          href="index.html"
+        >
+          Ana Sayfaya Dön
+          <span class="material-icons text-base">home</span>
+        </a>
+        <a
+          class="inline-flex items-center justify-center gap-2 rounded-full border border-solingen-blue/20 px-6 py-3 text-solingen-dark/80 transition hover:-translate-y-1 hover:border-solingen-blue/40"
+          href="mailto:info@solingenenergy.com"
+        >
+          Bize doğrudan e-posta gönderin
+          <span class="material-icons text-base">mail</span>
+        </a>
+      </div>
+    </main>
+    <script>
+      const counter = document.getElementById("redirect-count");
+      let remaining = Number(counter?.textContent || 0);
+
+      const tick = () => {
+        remaining -= 1;
+        if (counter && remaining > 0) {
+          counter.textContent = String(remaining);
+          setTimeout(tick, 1000);
+        } else {
+          window.location.href = "index.html";
+        }
+      };
+
+      if (remaining > 0) {
+        setTimeout(tick, 1000);
+      }
+    </script>
+  </body>
+</html>
