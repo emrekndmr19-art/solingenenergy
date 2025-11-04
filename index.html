@@ -109,6 +109,67 @@
         border: 1px solid rgba(255, 255, 255, 0.2);
         box-shadow: 0 28px 60px rgba(6, 33, 61, 0.45);
       }
+      .offer-form-button {
+        position: relative;
+        overflow: hidden;
+        border: 1px solid rgba(255, 255, 255, 0.35);
+        transition:
+          transform 0.3s ease,
+          box-shadow 0.3s ease,
+          background 0.3s ease,
+          border-color 0.3s ease;
+        animation: offerButtonPulse 2.6s ease-in-out infinite;
+      }
+      .offer-form-button::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(120deg, rgba(255, 255, 255, 0.4), rgba(255, 255, 255, 0));
+        opacity: 0;
+        transform: translateX(-120%);
+        animation: offerButtonShimmer 3.2s linear infinite;
+      }
+      .offer-form-button::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        border-radius: inherit;
+        border: 1px solid rgba(18, 118, 209, 0.18);
+        box-shadow: inset 0 0 0 1px rgba(18, 118, 209, 0.12);
+        pointer-events: none;
+      }
+      .offer-form-button:hover {
+        transform: translateY(-6px) scale(1.02);
+        box-shadow: 0 20px 45px rgba(6, 33, 61, 0.35);
+        background: rgba(255, 255, 255, 0.95);
+        border-color: rgba(18, 118, 209, 0.35);
+      }
+      .offer-form-button:focus-visible {
+        outline: none;
+        box-shadow: 0 0 0 4px rgba(18, 118, 209, 0.25), 0 16px 38px rgba(6, 33, 61, 0.35);
+      }
+      @keyframes offerButtonPulse {
+        0%,
+        100% {
+          transform: translateY(0) scale(1);
+        }
+        50% {
+          transform: translateY(-3px) scale(1.01);
+        }
+      }
+      @keyframes offerButtonShimmer {
+        0% {
+          opacity: 0;
+          transform: translateX(-120%);
+        }
+        50% {
+          opacity: 0.6;
+        }
+        100% {
+          opacity: 0;
+          transform: translateX(120%);
+        }
+      }
       @media (min-width: 768px) {
         .brand-logo {
           width: 190px;
@@ -674,7 +735,11 @@
                       Otomatik sulama sistemlerinde entegre çözümler
                     </li>
                   </ul>
-                  <a class="inline-flex items-center justify-center gap-3 rounded-full bg-white/90 px-6 py-3 font-semibold text-solingen-dark shadow-lg transition hover:-translate-y-1 hover:shadow-neon" href="#iletisim">
+                  <a
+                    class="offer-form-button inline-flex items-center justify-center gap-3 rounded-full bg-white/90 px-6 py-3 font-semibold text-solingen-dark shadow-lg transition"
+                    href="#iletisim-form"
+                    data-scroll-target="#iletisim-form"
+                  >
                     Teklif Formuna Gidin
                     <span class="material-icons text-solingen-blue">east</span>
                   </a>
@@ -1253,6 +1318,37 @@
               firstField.focus({ preventScroll: true });
             } catch (error) {
               firstField.focus();
+            }
+          }
+        });
+      });
+
+      document.querySelectorAll("[data-scroll-target]").forEach((link) => {
+        link.addEventListener("click", (event) => {
+          const targetSelector = link.getAttribute("data-scroll-target");
+
+          if (!targetSelector) {
+            return;
+          }
+
+          const targetElement = document.querySelector(targetSelector);
+
+          if (!targetElement) {
+            return;
+          }
+
+          event.preventDefault();
+          targetElement.scrollIntoView({ behavior: "smooth", block: "start" });
+
+          const focusableElement = targetElement.matches("input, select, textarea, button")
+            ? targetElement
+            : targetElement.querySelector("input, select, textarea, button");
+
+          if (focusableElement && typeof focusableElement.focus === "function") {
+            try {
+              focusableElement.focus({ preventScroll: true });
+            } catch (error) {
+              focusableElement.focus();
             }
           }
         });
