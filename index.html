@@ -1196,6 +1196,29 @@
 
       const contactForm = document.getElementById("iletisim");
 
+      document.querySelectorAll('a[href="#iletisim"]').forEach((link) => {
+        link.addEventListener("click", (event) => {
+          if (!contactForm) {
+            return;
+          }
+
+          event.preventDefault();
+          contactForm.scrollIntoView({ behavior: "smooth", block: "start" });
+
+          const firstField = contactForm.querySelector(
+            "input, select, textarea, button"
+          );
+
+          if (firstField && typeof firstField.focus === "function") {
+            try {
+              firstField.focus({ preventScroll: true });
+            } catch (error) {
+              firstField.focus();
+            }
+          }
+        });
+      });
+
       if (contactForm) {
         const submitButton = contactForm.querySelector("[data-submit-button]");
         const statusMessage = contactForm.querySelector("[data-form-status]");
