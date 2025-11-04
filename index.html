@@ -128,6 +128,7 @@
         opacity: 0;
         transform: translateX(-120%);
         animation: offerButtonShimmer 3.2s linear infinite;
+        pointer-events: none;
       }
       .offer-form-button::after {
         content: "";
@@ -1368,37 +1369,6 @@
         };
 
         registerSmoothScroll(link, targetSelector, options);
-      });
-
-      document.querySelectorAll("[data-scroll-target]").forEach((link) => {
-        link.addEventListener("click", (event) => {
-          const targetSelector = link.getAttribute("data-scroll-target");
-
-          if (!targetSelector) {
-            return;
-          }
-
-          const targetElement = document.querySelector(targetSelector);
-
-          if (!targetElement) {
-            return;
-          }
-
-          event.preventDefault();
-          targetElement.scrollIntoView({ behavior: "smooth", block: "start" });
-
-          const focusableElement = targetElement.matches("input, select, textarea, button")
-            ? targetElement
-            : targetElement.querySelector("input, select, textarea, button");
-
-          if (focusableElement && typeof focusableElement.focus === "function") {
-            try {
-              focusableElement.focus({ preventScroll: true });
-            } catch (error) {
-              focusableElement.focus();
-            }
-          }
-        });
       });
 
       if (contactForm) {
