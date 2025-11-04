@@ -1384,7 +1384,12 @@
         });
 
       document.addEventListener("click", (event) => {
-        const trigger = event.target.closest("[data-scroll-target]");
+        const eventTarget = event.target;
+        if (!eventTarget || typeof eventTarget.closest !== "function") {
+          return;
+        }
+
+        const trigger = eventTarget.closest("[data-scroll-target]");
 
         if (!trigger || trigger.hasAttribute("disabled") || trigger.getAttribute("aria-disabled") === "true") {
           return;
@@ -1399,7 +1404,12 @@
           return;
         }
 
-        const trigger = event.target.closest("[data-scroll-target]");
+        const eventTarget = event.target;
+        if (!eventTarget || typeof eventTarget.closest !== "function") {
+          return;
+        }
+
+        const trigger = eventTarget.closest("[data-scroll-target]");
         if (
           !trigger ||
           trigger.hasAttribute("disabled") ||
