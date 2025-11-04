@@ -926,7 +926,10 @@
                   </div>
                 </div>
               </div>
-              <div class="rounded-[40px] bg-gradient-to-br from-white via-solingen-light/70 to-white text-solingen-dark p-12 shadow-[0_28px_70px_rgba(6,33,61,0.28)] border border-solingen-blue/15 space-y-7 fade-up">
+              <div
+                id="iletisim"
+                class="rounded-[40px] bg-gradient-to-br from-white via-solingen-light/70 to-white text-solingen-dark p-12 shadow-[0_28px_70px_rgba(6,33,61,0.28)] border border-solingen-blue/15 space-y-7 fade-up"
+              >
                 <p class="inline-flex items-center gap-2 rounded-full bg-solingen-blue/10 px-4 py-2 text-xs font-semibold uppercase tracking-[0.4em] text-solingen-blue">
                   <span class="material-icons text-base">flash_on</span>
                   Hızlı Teklif
@@ -937,7 +940,7 @@
                 </p>
                 <form
                   class="grid gap-4"
-                  id="iletisim"
+                  id="iletisim-form"
                   name="iletisim"
                   method="post"
                   action="tesekkurler.html"
@@ -1194,7 +1197,43 @@
         return encoded.toString();
       };
 
-      const contactForm = document.getElementById("iletisim");
+      const contactSection = document.getElementById("iletisim");
+      const contactForm = document.getElementById("iletisim-form");
+
+      document.querySelectorAll('a[href="#iletisim"]').forEach((link) => {
+        link.addEventListener("click", (event) => {
+          if (!contactSection) {
+            return;
+          }
+
+          event.preventDefault();
+          contactSection.scrollIntoView({ behavior: "smooth", block: "start" });
+
+          const firstField = contactForm?.querySelector(
+            "input, select, textarea, button"
+          );
+
+          if (firstField && typeof firstField.focus === "function") {
+            try {
+              firstField.focus({ preventScroll: true });
+            } catch (error) {
+              firstField.focus();
+            }
+          }
+
+          if (typeof window !== "undefined") {
+            try {
+              if (window.history && typeof window.history.replaceState === "function") {
+                window.history.replaceState(null, "", "#iletisim");
+              } else {
+                window.location.hash = "iletisim";
+              }
+            } catch (error) {
+              window.location.hash = "iletisim";
+            }
+          }
+        });
+      });
 
       document.querySelectorAll('a[href="#iletisim"]').forEach((link) => {
         link.addEventListener("click", (event) => {
