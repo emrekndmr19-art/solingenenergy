@@ -109,6 +109,67 @@
         border: 1px solid rgba(255, 255, 255, 0.2);
         box-shadow: 0 28px 60px rgba(6, 33, 61, 0.45);
       }
+      .offer-form-button {
+        position: relative;
+        overflow: hidden;
+        border: 1px solid rgba(255, 255, 255, 0.35);
+        transition:
+          transform 0.3s ease,
+          box-shadow 0.3s ease,
+          background 0.3s ease,
+          border-color 0.3s ease;
+        animation: offerButtonPulse 2.6s ease-in-out infinite;
+      }
+      .offer-form-button::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(120deg, rgba(255, 255, 255, 0.4), rgba(255, 255, 255, 0));
+        opacity: 0;
+        transform: translateX(-120%);
+        animation: offerButtonShimmer 3.2s linear infinite;
+      }
+      .offer-form-button::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        border-radius: inherit;
+        border: 1px solid rgba(18, 118, 209, 0.18);
+        box-shadow: inset 0 0 0 1px rgba(18, 118, 209, 0.12);
+        pointer-events: none;
+      }
+      .offer-form-button:hover {
+        transform: translateY(-6px) scale(1.02);
+        box-shadow: 0 20px 45px rgba(6, 33, 61, 0.35);
+        background: rgba(255, 255, 255, 0.95);
+        border-color: rgba(18, 118, 209, 0.35);
+      }
+      .offer-form-button:focus-visible {
+        outline: none;
+        box-shadow: 0 0 0 4px rgba(18, 118, 209, 0.25), 0 16px 38px rgba(6, 33, 61, 0.35);
+      }
+      @keyframes offerButtonPulse {
+        0%,
+        100% {
+          transform: translateY(0) scale(1);
+        }
+        50% {
+          transform: translateY(-3px) scale(1.01);
+        }
+      }
+      @keyframes offerButtonShimmer {
+        0% {
+          opacity: 0;
+          transform: translateX(-120%);
+        }
+        50% {
+          opacity: 0.6;
+        }
+        100% {
+          opacity: 0;
+          transform: translateX(120%);
+        }
+      }
       @media (min-width: 768px) {
         .brand-logo {
           width: 190px;
@@ -572,12 +633,13 @@
                 <a class="header-menu-link" href="#biz-kimiz">Biz Kimiz?</a>
                 <a class="header-menu-link" href="#faaliyetler">Enerji Faaliyetleri</a>
                 <a class="header-menu-link" href="#cozumler">Çözümlerimiz</a>
-                <a class="header-menu-link" href="#iletisim">İletişim</a>
+                <a class="header-menu-link" href="#iletisim-form" data-scroll-target="#iletisim-form">İletişim</a>
               </nav>
               <div class="flex items-center gap-4">
                 <a
                   class="header-cta hidden sm:inline-flex items-center gap-2 rounded-full px-5 py-2 font-semibold transition-all duration-300"
-                  href="#iletisim"
+                  href="#iletisim-form"
+                  data-scroll-target="#iletisim-form"
                 >
                   <span class="material-icons text-lg text-solingen-blue">flash_on</span>
                   Hızlı Teklif
@@ -605,11 +667,18 @@
                 <a class="transition text-solingen-dark/80 hover:text-solingen-blue" href="#biz-kimiz">Biz Kimiz?</a>
                 <a class="transition text-solingen-dark/80 hover:text-solingen-blue" href="#faaliyetler">Enerji Faaliyetleri</a>
                 <a class="transition text-solingen-dark/80 hover:text-solingen-blue" href="#cozumler">Çözümlerimiz</a>
-                <a class="transition text-solingen-dark/80 hover:text-solingen-blue" href="#iletisim">İletişim</a>
+                <a
+                  class="transition text-solingen-dark/80 hover:text-solingen-blue"
+                  href="#iletisim-form"
+                  data-scroll-target="#iletisim-form"
+                >
+                  İletişim
+                </a>
               </nav>
               <a
                 class="mt-6 inline-flex w-full items-center justify-center gap-3 rounded-full bg-solingen-blue px-6 py-3 font-semibold text-white shadow-neon transition hover:-translate-y-0.5"
-                href="#iletisim"
+                href="#iletisim-form"
+                data-scroll-target="#iletisim-form"
               >
                 <span class="material-icons">flash_on</span>
                 Hızlı Teklif Al
@@ -623,7 +692,8 @@
               <div class="space-y-6 relative z-10 fade-up hero-copy">
                 <a
                   class="inline-flex items-center gap-3 rounded-full hero-lead-badge px-5 py-2.5 text-sm uppercase tracking-[0.35em] transition hover:bg-white/30"
-                  href="#iletisim"
+                  href="#iletisim-form"
+                  data-scroll-target="#iletisim-form"
                 >
                   <span class="material-icons text-base">flash_on</span>
                   En iyi teklifi bizden alın!
@@ -642,7 +712,11 @@
                   <a class="inline-flex items-center justify-center gap-3 hero-secondary-cta" href="#biz-kimiz">
                     Hakkımızda
                   </a>
-                  <a class="inline-flex items-center justify-center gap-3 hero-accent-cta" href="#iletisim">
+                  <a
+                    class="inline-flex items-center justify-center gap-3 hero-accent-cta"
+                    href="#iletisim-form"
+                    data-scroll-target="#iletisim-form"
+                  >
                     Hızlı Teklif Al
                     <span class="material-icons text-white">flash_on</span>
                   </a>
@@ -674,7 +748,11 @@
                       Otomatik sulama sistemlerinde entegre çözümler
                     </li>
                   </ul>
-                  <a class="inline-flex items-center justify-center gap-3 rounded-full bg-white/90 px-6 py-3 font-semibold text-solingen-dark shadow-lg transition hover:-translate-y-1 hover:shadow-neon" href="#iletisim">
+                  <a
+                    class="offer-form-button inline-flex items-center justify-center gap-3 rounded-full bg-white/90 px-6 py-3 font-semibold text-solingen-dark shadow-lg transition"
+                    href="#iletisim-form"
+                    data-scroll-target="#iletisim-form"
+                  >
                     Teklif Formuna Gidin
                     <span class="material-icons text-solingen-blue">east</span>
                   </a>
@@ -873,7 +951,8 @@
                 </ul>
                 <a
                   class="mt-6 inline-flex items-center gap-3 rounded-full bg-solingen-blue px-6 py-3 text-white font-semibold shadow-lg transition transform hover:-translate-y-1 hover:shadow-neon"
-                  href="#iletisim"
+                  href="#iletisim-form"
+                  data-scroll-target="#iletisim-form"
                 >
                   Çözüm Ortağınız Olalım
                   <span class="material-icons">east</span>
@@ -1200,62 +1279,95 @@
       const contactSection = document.getElementById("iletisim");
       const contactForm = document.getElementById("iletisim-form");
 
-      document.querySelectorAll('a[href="#iletisim"]').forEach((link) => {
-        link.addEventListener("click", (event) => {
-          if (!contactSection) {
+      const updateUrlHash = (hash) => {
+        if (!hash || typeof window === "undefined") {
+          return;
+        }
+
+        const normalizedHash = hash.startsWith("#") ? hash : `#${hash}`;
+
+        try {
+          if (window.history && typeof window.history.replaceState === "function") {
+            window.history.replaceState(null, "", normalizedHash);
+          } else {
+            window.location.hash = normalizedHash;
+          }
+        } catch (error) {
+          window.location.hash = normalizedHash;
+        }
+      };
+
+      const findFocusTarget = (element) => {
+        if (!element) {
+          return null;
+        }
+
+        if (element.matches("input, select, textarea, button")) {
+          return element;
+        }
+
+        return element.querySelector("input, select, textarea, button");
+      };
+
+      const registerSmoothScroll = (trigger, targetSelector, options = {}) => {
+        if (!trigger || !targetSelector) {
+          return;
+        }
+
+        trigger.addEventListener("click", (event) => {
+          const targetElement = document.querySelector(targetSelector);
+
+          if (!targetElement) {
             return;
           }
 
           event.preventDefault();
-          contactSection.scrollIntoView({ behavior: "smooth", block: "start" });
+          targetElement.scrollIntoView({ behavior: "smooth", block: "start" });
 
-          const firstField = contactForm?.querySelector(
-            "input, select, textarea, button"
-          );
+          const focusableElement =
+            options.focusTargetSelector
+              ? targetElement.querySelector(options.focusTargetSelector)
+              : findFocusTarget(targetElement);
 
-          if (firstField && typeof firstField.focus === "function") {
+          if (focusableElement && typeof focusableElement.focus === "function") {
             try {
-              firstField.focus({ preventScroll: true });
+              focusableElement.focus({ preventScroll: true });
             } catch (error) {
-              firstField.focus();
+              focusableElement.focus();
             }
           }
 
-          if (typeof window !== "undefined") {
-            try {
-              if (window.history && typeof window.history.replaceState === "function") {
-                window.history.replaceState(null, "", "#iletisim");
-              } else {
-                window.location.hash = "iletisim";
-              }
-            } catch (error) {
-              window.location.hash = "iletisim";
-            }
+          if (options.updateHash !== false) {
+            updateUrlHash(options.updateHash || targetSelector);
           }
         });
-      });
+      };
 
-      document.querySelectorAll('a[href="#iletisim"]').forEach((link) => {
-        link.addEventListener("click", (event) => {
-          if (!contactForm) {
-            return;
-          }
-
-          event.preventDefault();
-          contactForm.scrollIntoView({ behavior: "smooth", block: "start" });
-
-          const firstField = contactForm.querySelector(
-            "input, select, textarea, button"
-          );
-
-          if (firstField && typeof firstField.focus === "function") {
-            try {
-              firstField.focus({ preventScroll: true });
-            } catch (error) {
-              firstField.focus();
-            }
+      document
+        .querySelectorAll('a[href="#iletisim"], a[href="#iletisim-form"]')
+        .forEach((link) => {
+          if (!link.hasAttribute("data-scroll-target")) {
+            const target = contactForm ? "#iletisim-form" : "#iletisim";
+            link.setAttribute("data-scroll-target", target);
           }
         });
+
+      document.querySelectorAll("[data-scroll-target]").forEach((link) => {
+        const targetSelector = link.getAttribute("data-scroll-target");
+        const focusTargetSelector = link.getAttribute("data-focus-target");
+        const updateHashValue = link.getAttribute("data-update-hash");
+
+        const options = {
+          focusTargetSelector: focusTargetSelector || undefined,
+          updateHash:
+            updateHashValue === null
+              ? undefined
+              : updateHashValue === "false"
+              ? false
+              : updateHashValue,
+        };
+
+        registerSmoothScroll(link, targetSelector, options);
       });
 
       if (contactForm) {
