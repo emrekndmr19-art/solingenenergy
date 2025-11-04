@@ -749,14 +749,14 @@
                       Otomatik sulama sistemlerinde entegre çözümler
                     </li>
                   </ul>
-                  <button
-                    type="button"
+                  <a
                     class="offer-form-button inline-flex items-center justify-center gap-3 rounded-full bg-white/90 px-6 py-3 font-semibold text-solingen-dark shadow-lg transition"
+                    href="#iletisim-form"
                     data-scroll-target="#iletisim-form"
                   >
                     Teklif Formuna Gidin
                     <span class="material-icons text-solingen-blue">east</span>
-                  </button>
+                  </a>
                 </div>
               </div>
             </div>
@@ -1327,7 +1327,32 @@
         }
 
         event.preventDefault();
-        targetElement.scrollIntoView({ behavior: "smooth", block: "start" });
+
+        const normalizedHash = targetSelector.startsWith("#")
+          ? targetSelector
+          : `#${targetSelector}`;
+
+        const performNativeScroll = () => {
+          try {
+            window.location.hash = normalizedHash;
+          } catch (error) {
+            // Ignore hash update failures in environments without History API support
+          }
+        };
+
+        if (typeof targetElement.scrollIntoView === "function") {
+          try {
+            targetElement.scrollIntoView({ behavior: "smooth", block: "start" });
+          } catch (error) {
+            try {
+              targetElement.scrollIntoView(true);
+            } catch (fallbackError) {
+              performNativeScroll();
+            }
+          }
+        } else {
+          performNativeScroll();
+        }
 
         const focusTargetSelector = trigger.getAttribute("data-focus-target");
         const focusableElement = focusTargetSelector
