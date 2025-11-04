@@ -1327,7 +1327,32 @@
         }
 
         event.preventDefault();
-        targetElement.scrollIntoView({ behavior: "smooth", block: "start" });
+
+        const normalizedHash = targetSelector.startsWith("#")
+          ? targetSelector
+          : `#${targetSelector}`;
+
+        const performNativeScroll = () => {
+          try {
+            window.location.hash = normalizedHash;
+          } catch (error) {
+            // Ignore hash update failures in environments without History API support
+          }
+        };
+
+        if (typeof targetElement.scrollIntoView === "function") {
+          try {
+            targetElement.scrollIntoView({ behavior: "smooth", block: "start" });
+          } catch (error) {
+            try {
+              targetElement.scrollIntoView(true);
+            } catch (fallbackError) {
+              performNativeScroll();
+            }
+          }
+        } else {
+          performNativeScroll();
+        }
 
         const focusTargetSelector = trigger.getAttribute("data-focus-target");
         const focusableElement = focusTargetSelector
