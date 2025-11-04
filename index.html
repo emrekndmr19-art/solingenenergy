@@ -749,14 +749,14 @@
                       Otomatik sulama sistemlerinde entegre çözümler
                     </li>
                   </ul>
-                  <a
+                  <button
+                    type="button"
                     class="offer-form-button inline-flex items-center justify-center gap-3 rounded-full bg-white/90 px-6 py-3 font-semibold text-solingen-dark shadow-lg transition"
-                    href="#iletisim-form"
                     data-scroll-target="#iletisim-form"
                   >
                     Teklif Formuna Gidin
                     <span class="material-icons text-solingen-blue">east</span>
-                  </a>
+                  </button>
                 </div>
               </div>
             </div>
@@ -1310,38 +1310,43 @@
         return element.querySelector("input, select, textarea, button");
       };
 
-      const registerSmoothScroll = (trigger, targetSelector, options = {}) => {
-        if (!trigger || !targetSelector) {
+      const handleSmoothScroll = (event, trigger) => {
+        if (!trigger || !trigger.hasAttribute("data-scroll-target")) {
           return;
         }
 
-        trigger.addEventListener("click", (event) => {
-          const targetElement = document.querySelector(targetSelector);
+        const targetSelector = trigger.getAttribute("data-scroll-target");
+        if (!targetSelector) {
+          return;
+        }
 
-          if (!targetElement) {
-            return;
+        const targetElement = document.querySelector(targetSelector);
+
+        if (!targetElement) {
+          return;
+        }
+
+        event.preventDefault();
+        targetElement.scrollIntoView({ behavior: "smooth", block: "start" });
+
+        const focusTargetSelector = trigger.getAttribute("data-focus-target");
+        const focusableElement = focusTargetSelector
+          ? targetElement.querySelector(focusTargetSelector)
+          : findFocusTarget(targetElement);
+
+        if (focusableElement && typeof focusableElement.focus === "function") {
+          try {
+            focusableElement.focus({ preventScroll: true });
+          } catch (error) {
+            focusableElement.focus();
           }
+        }
 
-          event.preventDefault();
-          targetElement.scrollIntoView({ behavior: "smooth", block: "start" });
-
-          const focusableElement =
-            options.focusTargetSelector
-              ? targetElement.querySelector(options.focusTargetSelector)
-              : findFocusTarget(targetElement);
-
-          if (focusableElement && typeof focusableElement.focus === "function") {
-            try {
-              focusableElement.focus({ preventScroll: true });
-            } catch (error) {
-              focusableElement.focus();
-            }
-          }
-
-          if (options.updateHash !== false) {
-            updateUrlHash(options.updateHash || targetSelector);
-          }
-        });
+        const updateHashValue = trigger.getAttribute("data-update-hash");
+        if (updateHashValue !== "false") {
+          const hashToApply = updateHashValue ? updateHashValue : targetSelector;
+          updateUrlHash(hashToApply);
+        }
       };
 
       document
@@ -1353,22 +1358,32 @@
           }
         });
 
-      document.querySelectorAll("[data-scroll-target]").forEach((link) => {
-        const targetSelector = link.getAttribute("data-scroll-target");
-        const focusTargetSelector = link.getAttribute("data-focus-target");
-        const updateHashValue = link.getAttribute("data-update-hash");
+      document.addEventListener("click", (event) => {
+        const trigger = event.target.closest("[data-scroll-target]");
 
-        const options = {
-          focusTargetSelector: focusTargetSelector || undefined,
-          updateHash:
-            updateHashValue === null
-              ? undefined
-              : updateHashValue === "false"
-              ? false
-              : updateHashValue,
-        };
+        if (!trigger || trigger.hasAttribute("disabled") || trigger.getAttribute("aria-disabled") === "true") {
+          return;
+        }
 
-        registerSmoothScroll(link, targetSelector, options);
+        handleSmoothScroll(event, trigger);
+      });
+
+      document.addEventListener("keydown", (event) => {
+        const allowedKeys = ["Enter", " ", "Space", "Spacebar"];
+        if (event.defaultPrevented || !allowedKeys.includes(event.key)) {
+          return;
+        }
+
+        const trigger = event.target.closest("[data-scroll-target]");
+        if (
+          !trigger ||
+          trigger.hasAttribute("disabled") ||
+          trigger.getAttribute("aria-disabled") === "true"
+        ) {
+          return;
+        }
+
+        handleSmoothScroll(event, trigger);
       });
 
       if (contactForm) {
