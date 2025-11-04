@@ -1298,16 +1298,38 @@
         }
       };
 
+      const isFocusableCandidate = (element) => {
+        if (!element) {
+          return false;
+        }
+
+        if (
+          element.matches('input[type="hidden"], [hidden], [aria-hidden="true"]') ||
+          element.closest('[hidden], [aria-hidden="true"]')
+        ) {
+          return false;
+        }
+
+        if (typeof window !== "undefined" && typeof window.getComputedStyle === "function") {
+          const styles = window.getComputedStyle(element);
+          if (!styles || styles.display === "none" || styles.visibility === "hidden") {
+            return false;
+          }
+        }
+
+        return true;
+      };
+
       const findFocusTarget = (element) => {
         if (!element) {
           return null;
         }
 
-        if (element.matches("input, select, textarea, button")) {
-          return element;
-        }
+        const candidates = element.matches("input, select, textarea, button")
+          ? [element]
+          : Array.from(element.querySelectorAll("input, select, textarea, button"));
 
-        return element.querySelector("input, select, textarea, button");
+        return candidates.find((candidate) => isFocusableCandidate(candidate)) || null;
       };
 
       const handleSmoothScroll = (event, trigger) => {
@@ -1380,6 +1402,10 @@
           if (!link.hasAttribute("data-scroll-target")) {
             const target = contactForm ? "#iletisim-form" : "#iletisim";
             link.setAttribute("data-scroll-target", target);
+          }
+
+          if (contactForm && !link.hasAttribute("data-focus-target")) {
+            link.setAttribute("data-focus-target", '[name="adSoyad"]');
           }
         });
 
