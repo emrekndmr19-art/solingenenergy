@@ -1025,20 +1025,14 @@
                   class="grid gap-4"
                   id="iletisim-form"
                   name="iletisim"
-                  method="post"
-                  action="tesekkurler.html"
-                  data-netlify="true"
-                  data-netlify-honeypot="bot-field"
-                  netlify
-                  netlify-honeypot="bot-field"
+                  method="POST"
+                  action="https://formspree.io/f/xkgpdjqq"
                 >
-                  <input type="hidden" name="form-name" value="iletisim" />
-                  <p hidden>
-                    <label>
-                      Lütfen bu alanı boş bırakın:
-                      <input name="bot-field" />
-                    </label>
-                  </p>
+                  <input type="hidden" name="_next" value="tesekkurler.html" />
+                  <label class="hidden" aria-hidden="true">
+                    Lütfen bu alanı boş bırakın:
+                    <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" />
+                  </label>
                   <input class="rounded-2xl border border-solingen-blue/20 px-4 py-3 focus:border-solingen-blue focus:ring-2 focus:ring-solingen-green/40" name="adSoyad" placeholder="Adınız Soyadınız" type="text" />
                   <input class="rounded-2xl border border-solingen-blue/20 px-4 py-3 focus:border-solingen-blue focus:ring-2 focus:ring-solingen-green/40" name="email" placeholder="E-posta adresiniz" type="email" />
                   <input class="rounded-2xl border border-solingen-blue/20 px-4 py-3 focus:border-solingen-blue focus:ring-2 focus:ring-solingen-green/40" name="telefon" placeholder="Telefon Numaranız" type="tel" />
@@ -1254,34 +1248,20 @@
 
       animateNumbers(document.querySelectorAll(".number"));
 
-      const buildEncodedFormPayload = (formElement) => {
-        const formData = new FormData(formElement);
-        const explicitFormName =
-          formElement.getAttribute("name") ||
-          formElement.getAttribute("data-form-name") ||
-          formElement.querySelector('[name="form-name"]')?.value ||
-          "";
-
-        if (explicitFormName) {
-          formData.set("form-name", explicitFormName);
-        }
-
-        const encoded = new URLSearchParams();
-        formData.forEach((value, key) => {
-          const isFileObject = typeof File !== "undefined" && value instanceof File;
-          if (isFileObject) {
-            encoded.append(key, value.name);
-          } else {
-            const normalizedValue = typeof value === "string" ? value : String(value ?? "");
-            encoded.append(key, normalizedValue);
-          }
-        });
-
-        return encoded.toString();
-      };
-
       const contactSection = document.getElementById("iletisim");
       const contactForm = document.getElementById("iletisim-form");
+
+      if (contactForm) {
+        const redirectInput = contactForm.querySelector('input[name="_next"]');
+        if (redirectInput) {
+          try {
+            const thanksUrl = new URL("tesekkurler.html", window.location.href);
+            redirectInput.value = thanksUrl.href;
+          } catch (error) {
+            redirectInput.value = "tesekkurler.html";
+          }
+        }
+      }
 
       const updateUrlHash = (hash) => {
         if (!hash || typeof window === "undefined") {
@@ -1475,90 +1455,7 @@
         handleSmoothScroll(event, trigger);
       });
 
-      if (contactForm) {
-        const submitButton = contactForm.querySelector("[data-submit-button]");
-        const statusMessage = contactForm.querySelector("[data-form-status]");
-        const originalButtonContent = submitButton ? submitButton.innerHTML : "";
-
-        const setButtonLoadingState = (isLoading) => {
-          if (!submitButton) {
-            return;
-          }
-
-          if (isLoading) {
-            submitButton.disabled = true;
-            submitButton.classList.add("opacity-75", "cursor-not-allowed");
-            submitButton.innerHTML =
-              '<span class="material-icons text-base animate-spin">autorenew</span> Gönderiliyor';
-          } else {
-            submitButton.disabled = false;
-            submitButton.classList.remove("opacity-75", "cursor-not-allowed");
-            submitButton.innerHTML = originalButtonContent;
-          }
-        };
-
-        const showStatusMessage = (message) => {
-          if (!statusMessage) {
-            return;
-          }
-
-          statusMessage.innerHTML = message;
-          statusMessage.classList.remove("hidden");
-          statusMessage.scrollIntoView({ behavior: "smooth", block: "center" });
-        };
-
-        contactForm.addEventListener("submit", async (event) => {
-          event.preventDefault();
-
-          if (statusMessage) {
-            statusMessage.classList.add("hidden");
-            statusMessage.textContent = "";
-          }
-
-          setButtonLoadingState(true);
-          let shouldResetButton = true;
-
-          try {
-            const encodedPayload = buildEncodedFormPayload(contactForm);
-            const submissionEndpoint = "/";
-            const response = await fetch(submissionEndpoint, {
-              method: "POST",
-              headers: { "Content-Type": "application/x-www-form-urlencoded" },
-              body: encodedPayload,
-            });
-
-            if (!response.ok) {
-              const error = new Error("Form gönderimi başarısız oldu");
-              error.status = response.status;
-              throw error;
-            }
-
-            const redirectTarget = contactForm.getAttribute("action") || "/";
-            shouldResetButton = false;
-            window.location.assign(redirectTarget);
-            return;
-          } catch (error) {
-            if (error?.status === 405) {
-              showStatusMessage(
-                'Sunucu form gönderimini reddetti (405 - Method Not Allowed). Netlify form entegrasyonunun henüz etkinleştirilmediğini veya formun son dağıtıma dahil edilmediğini gösterir. Lütfen Netlify panelinde formu yayınlayıp yeni bir dağıtım yaptıktan sonra tekrar deneyin.'
-              );
-              return;
-            }
-
-            if (statusMessage) {
-              console.error("Form submission failed", error);
-              let assistanceMessage =
-                "Form gönderilirken bir sorun oluştu. Lütfen daha sonra tekrar deneyin veya info@solingenenergy.com adresinden bizimle iletişime geçin.";
-
-              showStatusMessage(assistanceMessage);
-            }
-          } finally {
-            if (shouldResetButton) {
-              setButtonLoadingState(false);
-            }
-          }
-        });
-      }
+      // Netlify'ya özel form gönderim kodları kaldırıldı; Formspree ile doğrudan gönderim için ek JavaScript gerekmez.
     </script>
   </body>
 </html>
