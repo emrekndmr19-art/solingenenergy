@@ -1251,6 +1251,18 @@
       const contactSection = document.getElementById("iletisim");
       const contactForm = document.getElementById("iletisim-form");
 
+      if (contactForm) {
+        const redirectInput = contactForm.querySelector('input[name="_next"]');
+        if (redirectInput) {
+          try {
+            const thanksUrl = new URL("tesekkurler.html", window.location.href);
+            redirectInput.value = thanksUrl.href;
+          } catch (error) {
+            redirectInput.value = "tesekkurler.html";
+          }
+        }
+      }
+
       const updateUrlHash = (hash) => {
         if (!hash || typeof window === "undefined") {
           return;
