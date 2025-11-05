@@ -1025,20 +1025,14 @@
                   class="grid gap-4"
                   id="iletisim-form"
                   name="iletisim"
-                  method="post"
-                  action="tesekkurler.html"
-                  data-netlify="true"
-                  data-netlify-honeypot="bot-field"
-                  netlify
-                  netlify-honeypot="bot-field"
+                  method="POST"
+                  action="https://formspree.io/f/xkgpdjqq"
                 >
-                  <input type="hidden" name="form-name" value="iletisim" />
-                  <p hidden>
-                    <label>
-                      Lütfen bu alanı boş bırakın:
-                      <input name="bot-field" />
-                    </label>
-                  </p>
+                  <input type="hidden" name="_redirect" value="tesekkurler.html" />
+                  <label class="hidden" aria-hidden="true">
+                    Lütfen bu alanı boş bırakın:
+                    <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" />
+                  </label>
                   <input class="rounded-2xl border border-solingen-blue/20 px-4 py-3 focus:border-solingen-blue focus:ring-2 focus:ring-solingen-green/40" name="adSoyad" placeholder="Adınız Soyadınız" type="text" />
                   <input class="rounded-2xl border border-solingen-blue/20 px-4 py-3 focus:border-solingen-blue focus:ring-2 focus:ring-solingen-green/40" name="email" placeholder="E-posta adresiniz" type="email" />
                   <input class="rounded-2xl border border-solingen-blue/20 px-4 py-3 focus:border-solingen-blue focus:ring-2 focus:ring-solingen-green/40" name="telefon" placeholder="Telefon Numaranız" type="tel" />
